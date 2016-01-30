@@ -101,6 +101,16 @@ BasicGame.Game.prototype = {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_01', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
+           } else if ( element.name.match( re_spr_ennemy_big_01 ) ) {
+            l = new Villager(this.game,x,y,'spr_ennemy_big_01');
+         	 	this.game.add.existing(l);
+         	 	l.init(l);
+         		this.villagers.push( l );
+           } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
+            l = new Villager(this.game,x,y,'spr_ennemy_small_01');
+         	 	this.game.add.existing(l);
+         	 	l.init(l);
+         		this.villagers.push( l );
            }
          } else {
            console.log( 'not matchable' );

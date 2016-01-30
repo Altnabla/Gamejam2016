@@ -69,6 +69,9 @@ BasicGame.Game.prototype = {
 		this.villagers[i] = villager;
 	 }
 
+  //  var collide_box = new CollideBox(this.game, 400, 400, 400, 400);
+  //  this.parallax_level1.add( collide_box );
+
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;
@@ -76,9 +79,17 @@ BasicGame.Game.prototype = {
     var re_spr_ennemy_small_01 = /spr_ennemy_small_01.*/;
     var re_l3_tile_01 = /l3_tile_01.*/;
     var re_l3_tile_02 = /l3_tile_02.*/;
+    var re_box = /box.*/;
 
     // map
      var mapJSON = this.game.cache.getJSON('map');
+     var mapBoxes = mapJSON.entity[0].obj_info;
+     var collideBoxes = {};
+
+     for (var i = 0; i < mapBoxes.length; ++i) {
+       collideBoxes[ mapBoxes[ i ].name ] = mapBoxes[ i ];
+     }
+
      var mapLayers = mapJSON.entity[0].animation;
      for (var i = 0; i < mapLayers.length; ++i) {
        var layer = mapLayers[ i ];
@@ -111,6 +122,31 @@ BasicGame.Game.prototype = {
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+          } else if ( element.name.match( re_box ) ) {
+            var box = collideBoxes[ element.name ];
+            var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
+            var scale_y = element.key[0].object.scale_y ? element.key[0].object.scale_y : 1;
+            console.log( scale_x );
+            console.log( scale_y );
+            console.log( box );
+            var w = Math.abs(box.w) * scale_x;
+            var h = Math.abs(box.h) * scale_y;
+            // var ry = 1152 - (y - box.h) * scale_y;
+            var ry = y ;
+            var rx = x * scale_x;
+            if ( box.w < 0) {
+              rx += box.w * scale_x;
+            }
+            if ( box.h < 0) {
+              ry += box.h * scale_y;
+            }
+             ry += 500;
+
+            var collide_box = new CollideBox(this.game, rx, ry, w, h);
+            this.parallax_level1.add( collide_box );
+
+            console.log( collide_box );
+
            }
          } else {
            console.log( 'not matchable' );

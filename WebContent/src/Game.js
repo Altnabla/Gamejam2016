@@ -36,15 +36,43 @@ BasicGame.Game.prototype = {
 	create: function () {
 		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 
-	var test = new Props(this.game,100,100,'star');
-	this.game.add(test);
-	test.init();
-	
+  	// var test = new Props(this.game,100,100,'star');
+  	// this.game.add(test);
+  	// test.init();
+    this.game.world.setBounds(0, 0, 1024 * 6, 768 * 1.5);
+    //this.game.add.tileSprite( 0, 0, 1024 * 6, 768, 'plan_placeholder_1');
+    for ( var i = 1; i < 6; ++i ) {
+      var f = i - 1;
+      var p = this.game.add.tileSprite( f * 1024, 0, 1024, 768, 'plan_placeholder_' + i);
+      // p.tilePosition.x = f * 1024;
+      console.log( p );
+
+      // this.load.image( 'plan_placeholder_' + i, 'images/parallax/plan_placeholder_' + i + '.png' );
+    }
+    this.cursors = this.game.input.keyboard.createCursorKeys();
     console.log( this.game);
 	},
 
 	update: function ( game ) {
-    
+    if (this.cursors.up.isDown)
+    {
+        this.game.camera.y -= 4;
+    }
+    else if (this.cursors.down.isDown)
+    {
+        this.game.camera.y += 4;
+    }
+
+    if (this.cursors.left.isDown)
+    {
+      console.log( 'left' );
+        this.game.camera.x -= 4;
+    }
+    else if (this.cursors.right.isDown)
+    {
+      console.log( 'right' );
+        this.game.camera.x += 4;
+    }
 	},
 
 	quitGame: function (pointer) {

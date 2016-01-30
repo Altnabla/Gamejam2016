@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r5">
+    <folder id="0">
+        <file id="0" name="l2_tile_01.png" width="1024" height="829" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="l3_tile_01.png" width="1024" height="629" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="l5_tile_01.png" width="256" height="1536" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="l3_tile_02.png" width="1024" height="826" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="l2_tile_02.png" width="1024" height="353" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="entity_000">
+        <animation id="0" name="layer02A" length="1000" interval="100">
+            <gline pos="9027"/>
+            <mainline>
+                <key id="0"/>
+            </mainline>
+        </animation>
+        <animation id="1" name="layer03" length="1000" interval="100">
+            <mainline>
+                <key id="0"/>
+            </mainline>
+        </animation>
+    </entity>
+</spriter_data>

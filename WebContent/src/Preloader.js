@@ -34,6 +34,18 @@ BasicGame.Preloader.prototype = {
 		this.load.image('spaceship', 'images/game/spaceship.png');
 		this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
 
+		// parallax level 2
+		for ( var i = 1; i < 3; ++i ) {
+			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );
+		}
+
+		// parallax level 3
+		for ( var i = 1; i < 2; ++i ) {
+			this.load.image( 'l3_tile_0' + i, 'images/placeholders/l3_tile_0' + i + '.png' );
+		}
+
+		// parallax level 5
+		this.load.image( 'l5_tile_01', 'images/placeholders/l5_tile_01.png' );
 	},
 
 	create: function () {

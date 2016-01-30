@@ -9,8 +9,7 @@ PhysicsActor = function (game, x, y, texture) {
 PhysicsActor.prototype = Object.create(Phaser.Sprite.prototype);
 PhysicsActor.prototype.constructor = PhysicsActor;
 
-PhysicsActor.prototype.init = function() {
-
+PhysicsActor.prototype.create = function() {
 };
 
 PhysicsActor.prototype.update = function() {

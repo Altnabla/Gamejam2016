@@ -4,5 +4,5 @@ Props = function (game, x, y, texture) {
 
 };
 
-Props.prototype = Object.create(PhysicsActor);
+Props.prototype = Object.create(PhysicsActor.prototype);
 Props.prototype.constructor = Props;

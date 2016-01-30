@@ -53,10 +53,10 @@ Saucer.prototype.ToggleTractorBeam = function(bActivate)
 		this.emitter.minParticleSpeed.set(5*px, 5*py);
 		this.emitter.maxParticleSpeed.set(5*px, 5*py);
 		this.emitter.on = true;
-		var pxL = 600 * Math.cos(rad - Math.PI/12);
-		var pyL = 600 * Math.sin(rad - Math.PI/12);
-		var pxR = 600 * Math.cos(rad + Math.PI/12);
-		var pyR = 600 * Math.sin(rad + Math.PI/12);
+		var pxL = 800 * Math.cos(rad - Math.PI/12);
+		var pyL = 800 * Math.sin(rad - Math.PI/12);
+		var pxR = 800 * Math.cos(rad + Math.PI/12);
+		var pyR = 800 * Math.sin(rad + Math.PI/12);
 		var graphics = this.game.add.graphics(0, 0);
 		var poly = new Phaser.Polygon([ new Phaser.Point(tbeamX,tbeamY), new Phaser.Point(this.x+pxL, this.y+pyL), new Phaser.Point(this.x+pxR, this.y+pyR)]);
 		// graphics.clear();
@@ -81,13 +81,19 @@ Saucer.prototype.update = function() {
 
 	// this.game.time.elapsed
     //  Apply acceleration if the left/right arrow keys are held down
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+	// console.log(this.angle)
+	if(this.angle > 60 || this.angle <	-60)
+	{
+		this.currentRotL = 0;
+		this.currentRotR = 0;
+	}
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && this.angle > -60)
     {
-		this.currentRotL += this.game.time.elapsed*0.04; 
+		this.currentRotL = 30; 
     }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && this.angle < 60)
     {
-		this.currentRotR += this.game.time.elapsed*0.04; 
+		this.currentRotR = 30; 
     }
 	else
 	{
@@ -111,7 +117,7 @@ Saucer.prototype.update = function() {
 
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
 	{
-		this.body.thrust(1000);
+		this.body.thrust(600);
 	}
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
 	{

@@ -69,6 +69,9 @@ BasicGame.Game.prototype = {
 		this.villagers[i] = villager;
 	 }
 
+   var collide_box = new CollideBox(this.game, 400, 400, 400, 400);
+   this.parallax_level1.add( collide_box );
+
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;

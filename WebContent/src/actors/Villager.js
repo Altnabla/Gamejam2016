@@ -2,6 +2,7 @@
 Villager = function (game, x, y, texture) {
 	PhysicsActor.call(this,game,x,y,texture);
 	this.prevX = 0;
+	this.prevY = 0;
 	this.NoMovementCount = 0;
 	this.bHasStopped = false;
 	this.States = {
@@ -36,17 +37,35 @@ Villager.prototype.moveTo = function(x,y,timelimit)
 	this.currentDestination = [x,y];
 	this.bIsMoving = true;
 	this.timeLeft = timelimit;
+	if(this.x < this.currentDestination[0])
+	{
+		this.scale.x *= -1;
+	}
 }
 Villager.prototype.Idle = function()
 {
-	var randX = this.x + (-150 + Math.random()*300);
-	var randTimeLimit = 5+Math.random()*10;
-	this.moveTo(randX,this.y,randTimeLimit);
-    this.loadTexture('spr_enemy_idle', 0);
-	this.angle = 0;
-    this.animations.add('idle');
-    this.animations.play('idle', 3, true);
-	this.body.rotation = 0;
+	if(this.timeLeft <= 0)
+	{
+		if(Math.random() > 0.5)
+		{
+			var randX = this.x + (-150 + Math.random()*300);
+			var randTimeLimit = 5+Math.random()*10;
+			this.moveTo(randX,this.y,randTimeLimit);
+			this.loadTexture('spr_enemy_walk', 0);
+			this.angle = 0;
+			this.animations.add('walk');
+			this.animations.play('walk', 8, true);
+		}
+		else
+		{
+			this.loadTexture('spr_enemy_idle', 0);
+			this.angle = 0;
+			this.animations.add('idle');
+			this.animations.play('idle', 8, true);
+			this.timeLeft = 10+Math.random()*5;
+		}
+		this.body.rotation = 0;
+	}
 }
 
 Villager.prototype.attract = function(saucerbeam) {
@@ -58,7 +77,15 @@ Villager.prototype.attract = function(saucerbeam) {
 
 }
 
+Villager.prototype.PlayFallingAnimation = function()
+{
+	this.loadTexture('spr_enemy_falling', 0);
+    this.animations.add('falling');
+    this.animations.play('falling', 8, true);
+}
+
 Villager.prototype.update = function() {
+
 
 	if(this.attractedBy != "")
 	{
@@ -68,7 +95,11 @@ Villager.prototype.update = function() {
 		var active = saucerbeam.emitter.on;
 		if(active)
 		{
-			this.villagerState = this.States.FALLING;
+			if(this.villagerState != this.States.FALLING)
+			{
+				this.villagerState = this.States.FALLING;
+				this.PlayFallingAnimation();
+			}
 			// this.body.angularRotation += Math.random();
 			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
 			{
@@ -83,6 +114,24 @@ Villager.prototype.update = function() {
 			this.villagerState = this.States.IDLE;
 		}
 	}
+
+	else
+	{
+		if(Math.abs(this.y-this.prevY) > 1)
+		{
+			if(this.villagerState != this.States.FALLING)
+			{
+				this.villagerState = this.States.FALLING;
+				this.PlayFallingAnimation();
+			}
+			this.prevY = this.y;
+		}
+		else
+		{
+			this.villagerState = this.States.IDLE;
+		}
+	}
+
 	//Dirty AI
 	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{
@@ -91,7 +140,7 @@ Villager.prototype.update = function() {
 	// Update Movement
 	if(this.bIsMoving)
 	{
-		if(this.timeleft < 0 || this.bHasStopped)
+		if(this.timeLeft < 0 || this.bHasStopped)
 		{
 			this.bIsMoving = false;
 		}
@@ -107,7 +156,10 @@ Villager.prototype.update = function() {
 		{
 			this.bIsMoving = false;
 		}
-		 this.timeleft -= 100/this.game.time.elapsed;
+	}
+	if(this.timeLeft > 0)
+	{
+		this.timeLeft -= this.game.time.elapsed/100;
 	}
 	if(Math.abs(this.prevX-this.x) < 1)
 	{

@@ -1,0 +1,20 @@
+{
+  "frames": [
+    {
+      "filename": "buttonOut",
+      "frame": {"x":0,"y":0,"w":95,"h":94},
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {"x":0,"y":0,"w":95,"h":94},
+      "sourceSize": {"w":95,"h":94}
+    },
+    {
+      "filename": "buttonOver",
+      "frame": {"x":96,"y":0,"w":95,"h":94},
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {"x":96,"y":0,"w":95,"h":94},
+      "sourceSize": {"w":95,"h":94}
+    }
+  ]
+}

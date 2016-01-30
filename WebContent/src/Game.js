@@ -30,14 +30,14 @@ BasicGame.Game.prototype = {
 
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
-    this.physics.startSystem( Phaser.Physics.ARCADE );
 
   },
 
 	create: function () {
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+    this.physics.startSystem( Phaser.Physics.ARCADE );
 	var test = new Props(this.game,100,100,'spaceship');
 	this.game.add.existing(test);
+	test.init();
 
     console.log( this.game);
 	},

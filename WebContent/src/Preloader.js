@@ -41,7 +41,8 @@ BasicGame.Preloader.prototype = {
 		// this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
 		this.load.image('bullet','images/placeholders/spr_bullet_01.png');
 		this.load.image('fx_ray','images/placeholders/fx_ray.png');
-		
+		this.load.spritesheet('spr_enemy_idle', 'images/placeholders/spr_enemy_idle.png', 128, 128, 16);
+
 		// parallax level 2
 		for ( var i = 1; i < 3; ++i ) {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );

@@ -7,7 +7,8 @@ Villager = function (game, x, y, texture) {
 	this.States = {
 		IDLE : 0,
 		FALLING : 1,
-		ZOMBIE : 2
+		ZOMBIE : 2,
+		ATTACKING : 3
 	}
 	this.villagerState = this.States.IDLE;
 
@@ -23,6 +24,7 @@ Villager = function (game, x, y, texture) {
 		self.body.drag = 30;
 		self.anchor.setTo(0.5, 0.5);
 	}
+	
 };
 
 Villager.prototype = Object.create(PhysicsActor.prototype);
@@ -39,14 +41,20 @@ Villager.prototype.Idle = function()
 	var randX = this.x + (-150 + Math.random()*300);
 	var randTimeLimit = 5+Math.random()*10;
 	this.moveTo(randX,this.y,randTimeLimit);
+    this.loadTexture('spr_enemy_idle', 0);
+	this.angle = 0;
+    this.animations.add('idle');
+    this.animations.play('idle', 3, true);
+	this.body.rotation = 0;
 }
 
 Villager.prototype.attract = function(saucerbeam) {
 	this.attractedBy = saucerbeam;
     var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
-    this.body.rotation = angle + this.game.math.degToRad(90); 
+    // this.body.rotation = angle + this.game.math.degToRad(90); 
     this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject 
     this.body.force.y = Math.sin(angle) * this.speed;
+	
 }
 
 Villager.prototype.update = function() {
@@ -60,17 +68,17 @@ Villager.prototype.update = function() {
 		if(active)
 		{
 			this.villagerState = this.States.FALLING;
+			// this.body.angularRotation += Math.random();
 			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
 			{
 				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
-				this.body.rotation = angle;
 				this.body.force.x = Math.cos(angle) * 225;    // accelerateToObject 
 				this.body.force.y = Math.sin(angle) * 225;	
 			}
 		}
 		else
 		{
-			this.attractedBy = "";
+			this.attractedBy = "";	
 			this.villagerState = this.States.IDLE;
 		}
 	}	
@@ -99,7 +107,6 @@ Villager.prototype.update = function() {
 			this.bIsMoving = false;
 		}
 		 this.timeleft -= 100/this.game.time.elapsed;
-		 console.log();
 	}
 	if(Math.abs(this.prevX-this.x) < 1)
 	{

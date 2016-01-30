@@ -71,7 +71,7 @@ Villager.prototype.update = function() {
 		 this.timeleft -= 100/this.game.time.elapsed;
 		 console.log();
 	}
-	if(Math.abs(this.prevX-this.x) < 0.1)
+	if(Math.abs(this.prevX-this.x) < 1)
 	{
 		this.NoMovementCount++;
 		if(this.NoMovementCount > 3)

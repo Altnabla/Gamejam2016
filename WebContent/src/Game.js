@@ -39,7 +39,7 @@ BasicGame.Game.prototype = {
     this.physics.p2.setImpactEvents(true);
 
     var altarCollisionGroup = this.game.physics.p2.createCollisionGroup();
-    this.game.villagerCollisionGroup = this.game.physics.p2.createCollisionGroup();
+    var villagerCollisionGroup = this.game.physics.p2.createCollisionGroup();
 
 
     // parallax
@@ -104,6 +104,8 @@ BasicGame.Game.prototype = {
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+
+        		l.body.setCollisionGroup( villagerCollisionGroup );
            } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
             l = new Villager(this.game,x,y,'spr_ennemy_small_01');
             l.y -= l.height * 3;
@@ -129,11 +131,11 @@ BasicGame.Game.prototype = {
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
             l = new Altar(this.game, x, this.game.world.height - y);
-            l.y -= l.height;
+            // l.y -= l.height;
             this.game.add.existing(l);
             this.parallax_level2.add( l );
-            // l.body.setCollisionGroup(altarCollisionGroup);
-            // l.body.collides(this.game.villagerCollisionGroup, l.hitAltar, l);
+            l.body.setCollisionGroup(altarCollisionGroup);
+            l.body.collides( villagerCollisionGroup, l.hitAltar, l);
           }
          }
        }

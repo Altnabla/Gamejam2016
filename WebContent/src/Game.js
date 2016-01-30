@@ -36,6 +36,11 @@ BasicGame.Game.prototype = {
     this.game.world.setBounds(0, 0, 1024 * 4, 1152);
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 200;
+    this.physics.p2.setImpactEvents(true);
+
+    var altarCollisionGroup = this.game.physics.p2.createCollisionGroup();
+    this.game.villagerCollisionGroup = this.game.physics.p2.createCollisionGroup();
+
 
     // parallax
     this.parallax_level5 = this.game.add.group();
@@ -127,6 +132,8 @@ BasicGame.Game.prototype = {
             l.y -= l.height;
             this.game.add.existing(l);
             this.parallax_level2.add( l );
+            // l.body.setCollisionGroup(altarCollisionGroup);
+            // l.body.collides(this.game.villagerCollisionGroup, l.hitAltar, l);
           }
          }
        }

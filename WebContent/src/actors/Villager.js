@@ -1,6 +1,6 @@
 //  Here is a custom game object
 Villager = function (game, x, y, texture) {
-	PhysicsActor.call(this,game,x,y,texture);	
+	PhysicsActor.call(this,game,x,y,texture);
 	this.prevX = 0;
 	this.NoMovementCount = 0;
 	this.bHasStopped = false;
@@ -23,15 +23,16 @@ Villager = function (game, x, y, texture) {
 		self.body.angularAcceleration = 0;
 		self.body.drag = 30;
 		self.anchor.setTo(0.5, 0.5);
+		// self.body.setCollisionGroup( self.game.villagerCollisionGroup );
 	}
-	
+
 };
 
 Villager.prototype = Object.create(PhysicsActor.prototype);
 Villager.prototype.constructor = Villager;
 
 Villager.prototype.moveTo = function(x,y,timelimit)
-{	
+{
 	this.currentDestination = [x,y];
 	this.bIsMoving = true;
 	this.timeLeft = timelimit;
@@ -51,10 +52,10 @@ Villager.prototype.Idle = function()
 Villager.prototype.attract = function(saucerbeam) {
 	this.attractedBy = saucerbeam;
     var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
-    // this.body.rotation = angle + this.game.math.degToRad(90); 
-    this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject 
+    // this.body.rotation = angle + this.game.math.degToRad(90);
+    this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject
     this.body.force.y = Math.sin(angle) * this.speed;
-	
+
 }
 
 Villager.prototype.update = function() {
@@ -72,16 +73,16 @@ Villager.prototype.update = function() {
 			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
 			{
 				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
-				this.body.force.x = Math.cos(angle) * 225;    // accelerateToObject 
-				this.body.force.y = Math.sin(angle) * 225;	
+				this.body.force.x = Math.cos(angle) * 225;    // accelerateToObject
+				this.body.force.y = Math.sin(angle) * 225;
 			}
 		}
 		else
 		{
-			this.attractedBy = "";	
+			this.attractedBy = "";
 			this.villagerState = this.States.IDLE;
 		}
-	}	
+	}
 	//Dirty AI
 	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{

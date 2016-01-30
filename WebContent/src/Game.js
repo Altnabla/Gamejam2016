@@ -20,10 +20,6 @@ BasicGame.Game = function (game) {
 	this.villagers = []; // Array of villagers
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
-
-    this.starSpawnTimer = 0;
-    this.starSpawnFrequency = 10; // in ms
-    this.stars = [];
 };
 
 BasicGame.Game.prototype = {

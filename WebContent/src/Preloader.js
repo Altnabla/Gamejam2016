@@ -30,10 +30,8 @@ BasicGame.Preloader.prototype = {
 		// this.load.audio('titleMusic', ['audio/main_menu.mp3']);
 		// this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
 		//	+ lots of other required assets here
-		this.load.image('star', 'images/game/star.png');
-		this.load.image('spaceship', 'images/placeholders/spr_raoool.png');
 		this.load.image('villager-small-1','images/placeholders/spr_believer_small_01.png');
-		this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
+		// this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
 
 		// parallax level 2
 		for ( var i = 1; i < 3; ++i ) {

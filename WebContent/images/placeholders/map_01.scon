@@ -6,6 +6,9 @@
 					"gline": [
 						{
 							"pos": 9027
+						},
+						{
+							"pos": -233
 						}
 					],
 					"id": 0,
@@ -113,9 +116,214 @@
 					"gline": [
 						{
 							"pos": 9027
+						},
+						{
+							"pos": -232
+						},
+						{
+							"pos": -232
 						}
 					],
 					"id": 1,
+					"interval": 100,
+					"length": 1000,
+					"mainline": {
+						"key": [
+							{
+								"bone_ref": [],
+								"id": 0,
+								"object_ref": [
+									{
+										"id": 0,
+										"key": 0,
+										"timeline": "0",
+										"z_index": "0"
+									},
+									{
+										"id": 1,
+										"key": 0,
+										"timeline": "1",
+										"z_index": "1"
+									},
+									{
+										"id": 2,
+										"key": 0,
+										"timeline": "2",
+										"z_index": "2"
+									},
+									{
+										"id": 3,
+										"key": 0,
+										"timeline": "3",
+										"z_index": "3"
+									},
+									{
+										"id": 4,
+										"key": 0,
+										"timeline": "4",
+										"z_index": "4"
+									},
+									{
+										"id": 5,
+										"key": 0,
+										"timeline": "5",
+										"z_index": "5"
+									},
+									{
+										"id": 6,
+										"key": 0,
+										"timeline": "6",
+										"z_index": "6"
+									},
+									{
+										"id": 7,
+										"key": 0,
+										"timeline": "7",
+										"z_index": "7"
+									}
+								]
+							}
+						]
+					},
+					"name": "layer02A_sprites",
+					"timeline": [
+						{
+							"id": 0,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 5,
+										"folder": 0,
+										"x": 1144.927536231884,
+										"y": 232
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_altar"
+						},
+						{
+							"id": 1,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 6,
+										"folder": 0,
+										"x": 1552.1739130434783,
+										"y": 408.695652173913
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_big_01"
+						},
+						{
+							"id": 2,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 6,
+										"folder": 0,
+										"x": 3715.863689776733,
+										"y": 896.1222091656872
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_big_01_000"
+						},
+						{
+							"id": 3,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 6,
+										"folder": 0,
+										"x": 2478.260869565217,
+										"y": 400
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_big_01_001"
+						},
+						{
+							"id": 4,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 6,
+										"folder": 0,
+										"x": 3386.95652173913,
+										"y": 391.30434782608694
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_big_01_002"
+						},
+						{
+							"id": 5,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 7,
+										"folder": 0,
+										"x": 3525.4849498327762,
+										"y": 861.2709030100333
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_small_01"
+						},
+						{
+							"id": 6,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 7,
+										"folder": 0,
+										"x": 2913.846153846154,
+										"y": 263.07692307692304
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_small_01_000"
+						},
+						{
+							"id": 7,
+							"key": [
+								{
+									"id": 0,
+									"object": {
+										"file": 7,
+										"folder": 0,
+										"x": 2140.5405405405404,
+										"y": 264.86486486486484
+									},
+									"spin": 0
+								}
+							],
+							"name": "spr_ennemy_small_01_001"
+						}
+					]
+				},
+				{
+					"gline": [
+						{
+							"pos": 9027
+						}
+					],
+					"id": 2,
 					"interval": 100,
 					"length": 1000,
 					"mainline": {
@@ -276,7 +484,7 @@
 								}
 							],
 							"name": "box_006",
-							"obj": 6,
+							"obj": 4,
 							"object_type": "box"
 						},
 						{
@@ -296,7 +504,7 @@
 								}
 							],
 							"name": "box_007",
-							"obj": 7,
+							"obj": 5,
 							"object_type": "box"
 						},
 						{
@@ -316,7 +524,7 @@
 								}
 							],
 							"name": "box_008",
-							"obj": 8,
+							"obj": 6,
 							"object_type": "box"
 						},
 						{
@@ -335,7 +543,7 @@
 								}
 							],
 							"name": "box_009",
-							"obj": 9,
+							"obj": 7,
 							"object_type": "box"
 						},
 						{
@@ -354,207 +562,8 @@
 								}
 							],
 							"name": "box_010",
-							"obj": 10,
+							"obj": 8,
 							"object_type": "box"
-						}
-					]
-				},
-				{
-					"gline": [
-						{
-							"pos": 9027
-						}
-					],
-					"id": 2,
-					"interval": 100,
-					"length": 1000,
-					"mainline": {
-						"key": [
-							{
-								"bone_ref": [],
-								"id": 0,
-								"object_ref": [
-									{
-										"id": 0,
-										"key": 0,
-										"timeline": "0",
-										"z_index": "0"
-									},
-									{
-										"id": 1,
-										"key": 0,
-										"timeline": "1",
-										"z_index": "1"
-									},
-									{
-										"id": 2,
-										"key": 0,
-										"timeline": "2",
-										"z_index": "2"
-									},
-									{
-										"id": 3,
-										"key": 0,
-										"timeline": "3",
-										"z_index": "3"
-									},
-									{
-										"id": 4,
-										"key": 0,
-										"timeline": "4",
-										"z_index": "4"
-									},
-									{
-										"id": 5,
-										"key": 0,
-										"timeline": "5",
-										"z_index": "5"
-									},
-									{
-										"id": 6,
-										"key": 0,
-										"timeline": "6",
-										"z_index": "6"
-									},
-									{
-										"id": 7,
-										"key": 0,
-										"timeline": "7",
-										"z_index": "7"
-									}
-								]
-							}
-						]
-					},
-					"name": "layer02A_sprites",
-					"timeline": [
-						{
-							"id": 0,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 5,
-										"folder": 0,
-										"x": 478.2608695652174,
-										"y": 821.7391304347825
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_altar"
-						},
-						{
-							"id": 1,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 6,
-										"folder": 0,
-										"x": 1552.1739130434783,
-										"y": 408.695652173913
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_big_01"
-						},
-						{
-							"id": 2,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 6,
-										"folder": 0,
-										"x": 3715.863689776733,
-										"y": 896.1222091656872
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_big_01_000"
-						},
-						{
-							"id": 3,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 6,
-										"folder": 0,
-										"x": 2478.260869565217,
-										"y": 400
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_big_01_001"
-						},
-						{
-							"id": 4,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 6,
-										"folder": 0,
-										"x": 3386.95652173913,
-										"y": 391.30434782608694
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_big_01_002"
-						},
-						{
-							"id": 5,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 7,
-										"folder": 0,
-										"x": 3525.4849498327762,
-										"y": 861.2709030100333
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_small_01"
-						},
-						{
-							"id": 6,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 7,
-										"folder": 0,
-										"x": 2913.846153846154,
-										"y": 263.07692307692304
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_small_01_000"
-						},
-						{
-							"id": 7,
-							"key": [
-								{
-									"id": 0,
-									"object": {
-										"file": 7,
-										"folder": 0,
-										"x": 2140.5405405405404,
-										"y": 264.86486486486484
-									},
-									"spin": 0
-								}
-							],
-							"name": "spr_ennemy_small_01_001"
 						}
 					]
 				},
@@ -698,22 +707,6 @@
 					"w": 277.7777777777777
 				},
 				{
-					"h": 212.96296296296293,
-					"name": "box_004",
-					"pivot_x": 0,
-					"pivot_y": 0,
-					"type": "box",
-					"w": 731.4814814814814
-				},
-				{
-					"h": 242.10526315789474,
-					"name": "box_005",
-					"pivot_x": 0,
-					"pivot_y": 0,
-					"type": "box",
-					"w": 705.2631578947369
-				},
-				{
 					"h": 177.02702702702703,
 					"name": "box_006",
 					"pivot_x": 0,
@@ -752,6 +745,30 @@
 					"pivot_y": 0,
 					"type": "box",
 					"w": -113.84615384615383
+				},
+				{
+					"h": 452.3809523809523,
+					"name": "box_011",
+					"pivot_x": 0,
+					"pivot_y": 0,
+					"type": "box",
+					"w": 445.23809523809524
+				},
+				{
+					"h": 109.52380952380952,
+					"name": "box_004",
+					"pivot_x": 0,
+					"pivot_y": 0,
+					"type": "box",
+					"w": 150
+				},
+				{
+					"h": 511.11111111111114,
+					"name": "box_005",
+					"pivot_x": 0,
+					"pivot_y": 0,
+					"type": "box",
+					"w": 461.1111111111109
 				}
 			]
 		}

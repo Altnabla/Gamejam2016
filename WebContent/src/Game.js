@@ -32,6 +32,18 @@ BasicGame.Game.prototype = {
     this.game.renderer.renderSession.roundPixels = true;
   },
 
+
+
+  preload:function(){
+        console.log("preloading assets");
+        // sounds
+        this.game.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
+        this.game.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
+
+  },
+
+
+
 	create: function () {
     this.game.world.setBounds(0, 0, 1024 * 4, 1152);
     this.physics.startSystem(Phaser.Physics.P2JS);
@@ -153,6 +165,11 @@ BasicGame.Game.prototype = {
     this.game.camera.follow(this.saucer);
     this.game.camera.deadzone = new Phaser.Rectangle( 200, 100, 1024 - 400, 768 - 350);
 
+    // Sound Manager
+    this.soundManager = new SoundManager(this.game,this);
+    this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
+    this.soundManager.Start();
+
     console.log( this.game);
 	},
 
@@ -166,13 +183,16 @@ BasicGame.Game.prototype = {
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
         this.villagers[ i ].alpha = 0.3;
-        console.log( 'Drag the sprites. Overlapping: true' );
+        // console.log( 'Drag the sprites. Overlapping: true' );
       }
       else
       {
         //console.log( 'Drag the sprites. Overlapping: false' );
       }
     }
+        // sound manager update
+        this.soundManager.update();
+
 	},
 
 
@@ -187,10 +207,10 @@ BasicGame.Game.prototype = {
 
   __render: function() {
 
-    this.game.debug.cameraInfo(this.game.camera, 32, 32);
-    this.game.debug.spriteCoords(this.saucer, 32, 600);
+        this.game.debug.cameraInfo(this.game.camera, 32, 32);
+        this.game.debug.spriteCoords(this.saucer, 32, 600);
 
-},
+    },
 
 	quitGame: function (pointer) {
 		//	Here you should destroy anything you no longer need.

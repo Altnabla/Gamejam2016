@@ -106,6 +106,11 @@ Villager.prototype.update = function() {
 				this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject
 				this.body.force.y = Math.sin(angle) * this.speed;
 			}
+			else
+			{
+				this.attractedBy = "";	
+				this.villagerState = this.States.IDLE;
+			}
 		}
 		else
 		{

@@ -34,10 +34,12 @@ BasicGame.Game.prototype = {
   },
 
 	create: function () {
-    this.physics.startSystem( Phaser.Physics.ARCADE );
-	var test = new Props(this.game,100,100,'spaceship');
+    this.physics.startSystem(Phaser.Physics.P2JS);
+	this.physics.p2.gravity.y = 200;
+
+	var test = new Saucer(this.game,100,100,'spaceship');
 	this.game.add.existing(test);
-	test.init();
+	test.init(test);
 
     console.log( this.game);
 	},

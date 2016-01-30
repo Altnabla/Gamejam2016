@@ -94421,7 +94421,7 @@ Phaser.Particles.Arcade.Emitter.prototype.emitParticle = function (x, y, key, fr
 
     particle.reset(emitX, emitY);
 
-    particle.angle = 0;
+    particle.angle = this.minRotation;
     particle.lifespan = this.lifespan;
 
     if (this.particleBringToTop)
@@ -94478,7 +94478,15 @@ Phaser.Particles.Arcade.Emitter.prototype.emitParticle = function (x, y, key, fr
 
     body.velocity.x = rnd.between(this.minParticleSpeed.x, this.maxParticleSpeed.x);
     body.velocity.y = rnd.between(this.minParticleSpeed.y, this.maxParticleSpeed.y);
-    body.angularVelocity = rnd.between(this.minRotation, this.maxRotation);
+	
+	if(this.minRotation!=this.maxRotation)
+	{
+		body.angularVelocity = rnd.between(this.minRotation, this.maxRotation);
+	}
+	else
+	{
+		body.angularVelocity = 0;
+	}
 
     body.gravity.y = this.gravity;
     body.angularDrag = this.angularDrag;

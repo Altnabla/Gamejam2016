@@ -14,7 +14,8 @@ Villager = function (game, x, y, texture) {
 	this.currentDestination = [0,0];
 	this.bIsMoving = false;
 	this.timeLeft = 0;
-
+	this.speed = 300;
+	this.attractedBy = "";
 	this.init = function(self)
 	{
 		Villager.prototype.init(self);
@@ -40,13 +41,44 @@ Villager.prototype.Idle = function()
 	this.moveTo(randX,this.y,randTimeLimit);
 }
 
+Villager.prototype.attract = function(saucerbeam) {
+	this.attractedBy = saucerbeam;
+    var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
+    this.body.rotation = angle + this.game.math.degToRad(90); 
+    this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject 
+    this.body.force.y = Math.sin(angle) * this.speed;
+}
+
 Villager.prototype.update = function() {
+
+	if(this.attractedBy != "")
+	{
+		var saucerbeam = this.attractedBy;
+		var distX = saucerbeam.x-this.x;
+		var distY = saucerbeam.y-this.y;
+		var active = saucerbeam.emitter.on;
+		if(active)
+		{
+			this.villagerState = this.States.FALLING;
+			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
+			{
+				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
+				this.body.rotation = angle;
+				this.body.force.x = Math.cos(angle) * 225;    // accelerateToObject 
+				this.body.force.y = Math.sin(angle) * 225;	
+			}
+		}
+		else
+		{
+			this.attractedBy = "";
+			this.villagerState = this.States.IDLE;
+		}
+	}	
 	//Dirty AI
 	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{
 		this.Idle();
 	}
-
 	// Update Movement
 	if(this.bIsMoving)
 	{

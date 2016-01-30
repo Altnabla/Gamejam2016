@@ -17,7 +17,7 @@ BasicGame.Game = function (game) {
     this.particles;	//	the particle manager
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
-
+	this.villagers = []; // Array of villagers
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
@@ -46,6 +46,7 @@ BasicGame.Game.prototype = {
     this.parallax_level3 = this.game.add.group();
     this.parallax_level2 = this.game.add.group();
     this.parallax_level1 = this.game.add.group();
+    this.context_layer = this.game.add.group();
 
     var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
     this.parallax_level5.add( background );
@@ -66,9 +67,10 @@ BasicGame.Game.prototype = {
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
-    var saucer = new Saucer(this.game,100,100,'spaceship');
-    this.game.add.existing(saucer);
-    saucer.init(saucer);
+    this.saucer = new Saucer(this.game,100,100,'spaceship',this);
+    this.game.add.existing(this.saucer);
+    this.saucer.init(this.saucer);
+
 
 	for(var i = 0;i<15;i++)
 	{
@@ -77,9 +79,11 @@ BasicGame.Game.prototype = {
 		var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
 		this.game.add.existing(villager);
 		villager.init(villager);
+		this.villagers[i] = villager;
 	}
-	
-    this.game.camera.follow(saucer);
+
+    this.game.camera.follow(this.saucer);
+    this.game.camera.deadzone = new Phaser.Rectangle( 100, 100, 1024 - 200, 768 - 350);
 
     console.log( this.game);
 	},
@@ -89,6 +93,13 @@ BasicGame.Game.prototype = {
     this.parallax_level3.x = - this.game.camera.x * 0.6;
     this.parallax_level3.y = - this.game.camera.y * 0.6;
 	},
+
+  __render: function() {
+
+    this.game.debug.cameraInfo(this.game.camera, 32, 32);
+    this.game.debug.spriteCoords(this.saucer, 32, 600);
+
+},
 
 	quitGame: function (pointer) {
 		//	Here you should destroy anything you no longer need.

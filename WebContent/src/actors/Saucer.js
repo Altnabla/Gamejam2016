@@ -1,9 +1,12 @@
 //  Here is a custom game object
-Saucer = function (game, x, y, texture) {
+Saucer = function (game, x, y, texture, gameinstance) {
 	PhysicsActor.call(this,game,x,y,texture);
 	this.currentRotL = 0;
 	this.currentRotR = 0;
+	this.currentAttractPointX = 0;
+	this.currentAttractPointY = 0;
 	this.emitter	 = "NULL";
+	this.gameinstance = gameinstance;
 	this.init = function(self)
 	{
 		Saucer.prototype.init(self);
@@ -13,9 +16,11 @@ Saucer = function (game, x, y, texture) {
 		self.body.angularDrag = 50;
 		self.anchor.setTo(0.5, 0.5);
 		self.emitter = self.game.add.emitter(self.x,self.y, 200);
-	    self.emitter.makeParticles('bullet');
-		self.emitter.setAlpha(1, 0, 3000);
-		self.emitter.setScale(0.0, 2, 0, 2, 3000);
+	    self.emitter.makeParticles('fx_ray');
+		self.emitter.setAlpha(1, 0, 2000);
+		self.emitter.setScale(0.0, 2, 1, 1, 2000);
+
+
 
 		// self.emitter.gravity = 600;
 
@@ -33,16 +38,38 @@ Saucer.prototype.ToggleTractorBeam = function(bActivate)
 	if(bActivate)
 	{
 		var rad = ((this.angle)* Math.PI / 180)+Math.PI/2;
-	    var px = 50 *Math.cos(rad);
-		var py = 50 *Math.sin(rad);
-		console.log(px);
-		console.log(py);
-		this.emitter.emitX = this.x + px;
-		this.emitter.emitY = this.y + py;
-		this.emitter.minParticleSpeed.set(10*px, 10*py);
-		this.emitter.maxParticleSpeed.set(10*px, 10*py);
-
+	    var px = 64 *Math.cos(rad);
+		var py = 64 *Math.sin(rad);
+		this.emitter.minRotation = this.angle;
+		this.emitter.maxRotation = this.angle;
+		var originX = this.x + px;
+		var originY = this.y + py;
+		var tbeamX = this.x + 150 * Math.cos(rad);
+		var tbeamY = this.y + 150 * Math.sin(rad);
+		this.currentAttractPointX = originX;
+		this.currentAttractPointY = originY;
+		this.emitter.emitX = originX;
+		this.emitter.emitY = originY;
+		this.emitter.minParticleSpeed.set(5*px, 5*py);
+		this.emitter.maxParticleSpeed.set(5*px, 5*py);
 		this.emitter.on = true;
+		var pxL = 600 * Math.cos(rad - Math.PI/12);
+		var pyL = 600 * Math.sin(rad - Math.PI/12);
+		var pxR = 600 * Math.cos(rad + Math.PI/12);
+		var pyR = 600 * Math.sin(rad + Math.PI/12);
+		var graphics = this.game.add.graphics(0, 0);
+		var poly = new Phaser.Polygon([ new Phaser.Point(tbeamX,tbeamY), new Phaser.Point(this.x+pxL, this.y+pyL), new Phaser.Point(this.x+pxR, this.y+pyR)]);
+		// graphics.clear();
+		// graphics.beginFill(0xFF33ff);
+		 // graphics.drawPolygon(poly.points);
+		 // graphics.endFill();
+		for (index = 0; index < this.gameinstance.villagers.length; ++index) {
+			var vil = this.gameinstance.villagers[index];
+			if (poly.contains(vil.x, vil.y))
+			{
+				vil.attract(this);
+			}
+		}
 	}
 	else
 	{

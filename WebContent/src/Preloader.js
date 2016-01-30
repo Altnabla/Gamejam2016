@@ -34,7 +34,7 @@ BasicGame.Preloader.prototype = {
 		this.load.image('spaceship', 'images/placeholders/spr_raoool.png');
 		this.load.image('villager-small-1','images/placeholders/spr_believer_small_01.png');
 		this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
-
+		this.load.image('bullet','images/placeholders/spr_bullet_01.png');
 		// parallax level 2
 		for ( var i = 1; i < 3; ++i ) {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );

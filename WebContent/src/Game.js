@@ -126,26 +126,22 @@ BasicGame.Game.prototype = {
             var box = collideBoxes[ element.name ];
             var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
             var scale_y = element.key[0].object.scale_y ? element.key[0].object.scale_y : 1;
-            console.log( scale_x );
-            console.log( scale_y );
-            console.log( box );
-            var w = Math.abs(box.w) * scale_x;
-            var h = Math.abs(box.h) * scale_y;
-            // var ry = 1152 - (y - box.h) * scale_y;
-            var ry = y ;
-            var rx = x * scale_x;
+
+            var w = Math.abs(box.w * scale_x);
+            var h = Math.abs(box.h * scale_y);
+            var ry = 1152-y;
+            var rx = x;
             if ( box.w < 0) {
               rx += box.w * scale_x;
             }
             if ( box.h < 0) {
-              ry += box.h * scale_y;
+              ry = 1152 - (y + box.h * scale_y);
             }
-             ry += 500;
 
-            var collide_box = new CollideBox(this.game, rx, ry, w, h);
-            this.parallax_level1.add( collide_box );
+            var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
+            // this.parallax_level1.add( collide_box );
 
-            console.log( collide_box );
+            // console.log( collide_box );
 
            }
          } else {

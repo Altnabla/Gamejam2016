@@ -33,7 +33,6 @@ BasicGame.MainMenu.prototype = {
 
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
 		// this.music.stop();
-
 		//	And start the actual game
 		this.state.start('Game');
 

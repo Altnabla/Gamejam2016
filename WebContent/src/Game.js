@@ -30,26 +30,17 @@ BasicGame.Game.prototype = {
 
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
-    this.physics.startSystem( Phaser.Physics.ARCADE );
+
   },
 
 	create: function () {
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+    this.physics.startSystem(Phaser.Physics.P2JS);
+	this.physics.p2.gravity.y = 200;
 
-  	// var test = new Props(this.game,100,100,'star');
-  	// this.game.add(test);
-  	// test.init();
-    this.game.world.setBounds(0, 0, 1024 * 6, 768 * 1.5);
-    //this.game.add.tileSprite( 0, 0, 1024 * 6, 768, 'plan_placeholder_1');
-    for ( var i = 1; i < 6; ++i ) {
-      var f = i - 1;
-      var p = this.game.add.tileSprite( f * 1024, 0, 1024, 768, 'plan_placeholder_' + i);
-      // p.tilePosition.x = f * 1024;
-      console.log( p );
+	var test = new Saucer(this.game,100,100,'spaceship');
+	this.game.add.existing(test);
+	test.init(test);
 
-      // this.load.image( 'plan_placeholder_' + i, 'images/parallax/plan_placeholder_' + i + '.png' );
-    }
-    this.cursors = this.game.input.keyboard.createCursorKeys();
     console.log( this.game);
 	},
 

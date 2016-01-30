@@ -58,20 +58,6 @@ BasicGame.Game.prototype = {
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
 
-    // villagers randoms
-	 for(var i = 0;i<15;i++)
-	 {
-	 	var vilX = this.game.world.randomX;
-	 	var vilY = 100;
-	 	var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
-	 	this.game.add.existing(villager);
-	 	villager.init(villager);
-		this.villagers[i] = villager;
-	 }
-
-  //  var collide_box = new CollideBox(this.game, 400, 400, 400, 400);
-  //  this.parallax_level1.add( collide_box );
-
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;
@@ -93,15 +79,10 @@ BasicGame.Game.prototype = {
      var mapLayers = mapJSON.entity[0].animation;
      for (var i = 0; i < mapLayers.length; ++i) {
        var layer = mapLayers[ i ];
-       console.log( 'length:' + layer.timeline.length );
-       console.log( layer.timeline );
        for (var j = 0; j < layer.timeline.length; ++j ){
          var element = layer.timeline[ j ];
-         console.log( element.name );
          var x = element.key[0].object.x ? element.key[0].object.x : 0;
          var y = element.key[0].object.y ? element.key[0].object.y : 0;
-         console.log( 'x: ' + x );
-         console.log( 'y: ' + y );
          var l;
          if ( element.name ) {
            if ( element.name.match( re_l3_tile_02 ) ) {
@@ -113,12 +94,14 @@ BasicGame.Game.prototype = {
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
            } else if ( element.name.match( re_spr_ennemy_big_01 ) ) {
-            l = new Villager(this.game,x,y,'spr_ennemy_big_01');
+            l = new Villager(this.game,x,y,'spr_ennemy_small_01');
+            l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
            } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
             l = new Villager(this.game,x,y,'spr_ennemy_small_01');
+            l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
@@ -129,23 +112,22 @@ BasicGame.Game.prototype = {
 
             var w = Math.abs(box.w * scale_x);
             var h = Math.abs(box.h * scale_y);
-            var ry = 1152-y;
+            var ry = this.game.world.height-y;
             var rx = x;
             if ( box.w < 0) {
               rx += box.w * scale_x;
             }
             if ( box.h < 0) {
-              ry = 1152 - (y + box.h * scale_y);
+              ry = this.game.world.height - (y + box.h * scale_y);
             }
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
-            // this.parallax_level1.add( collide_box );
-
-            // console.log( collide_box );
-
-           }
-         } else {
-           console.log( 'not matchable' );
+          } else if ( element.name.match(re_spr_altar) ) {
+            l = new Altar(this.game, x, this.game.world.height - y);
+            l.y -= l.height;
+            this.game.add.existing(l);
+            this.parallax_level2.add( l );
+          }
          }
        }
      }

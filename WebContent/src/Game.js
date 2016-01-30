@@ -33,7 +33,7 @@ BasicGame.Game.prototype = {
   },
 
 	create: function () {
-    this.game.world.setBounds(0, 0, 1024 * 6, 768 * 1.5);
+    this.game.world.setBounds(0, 0, 1024 * 2, 768 * 1.5);
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 200;
 
@@ -48,7 +48,21 @@ BasicGame.Game.prototype = {
     this.parallax_level1 = this.game.add.group();
 
     var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
+    this.parallax_level5.add( background );
     background.fixedToCamera = true;
+
+    for (var i = 1 ; i < 3 ; ++i ) {
+      var f = i -1;
+      var l = this.game.add.sprite( f * 1024, (768 * 1.5) - 1024, 'l2_tile_0' + i );
+      this.parallax_level2.add( l );
+    }
+
+    for (var i = 1 ; i < 3 ; ++i ) {
+      var f = i -1;
+      var l = this.game.add.sprite( f * 1024, (768 * 1.5) - 1024, 'l3_tile_0' + i );
+      this.parallax_level3.add( l );
+      l.fixedToCamera = true;
+    }
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
@@ -63,6 +77,8 @@ BasicGame.Game.prototype = {
 
 	update: function ( game ) {
 
+    this.parallax_level3.x = - this.game.camera.x * 0.6;
+    this.parallax_level3.y = - this.game.camera.y * 0.6;
 	},
 
 	quitGame: function (pointer) {
@@ -71,7 +87,6 @@ BasicGame.Game.prototype = {
 
 		//	Then let's go back to the main menu.
 		this.state.start('MainMenu');
-
 	}
 
 };

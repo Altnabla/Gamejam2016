@@ -1,22 +1,22 @@
 //  Here is a custom game object
 Villager = function (game, x, y, texture) {
 	PhysicsActor.call(this,game,x,y,texture);
-	
+
 	this.States = {
 		IDLE : 0,
 		FALLING : 1,
 		ZOMBIE : 2
 	}
 	this.villagerState = this.States.IDLE;
-	
+
 	this.currentDestination = [0,0];
 	this.bIsMoving = false;
 	this.timeLeft = 0;
-	
+
 	this.init = function(self)
 	{
 		Villager.prototype.init(self);
-		self.body.angularAcceleration = 0;	
+		self.body.angularAcceleration = 0;
 		self.body.drag = 30;
 		self.anchor.setTo(0.5, 0.5);
 	}
@@ -41,12 +41,12 @@ Villager.prototype.Idle = function()
 
 Villager.prototype.update = function() {
 	//Dirty AI
-	
-	if(this.villagerState == this.States.IDLE && this.bIsMoving = false)
+
+	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{
 		this.Idle();
 	}
-	
+
 	// Update Movement
 	if(this.bIsMoving)
 	{

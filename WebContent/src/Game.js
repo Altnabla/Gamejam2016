@@ -94,12 +94,14 @@ BasicGame.Game.prototype = {
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
            } else if ( element.name.match( re_spr_ennemy_big_01 ) ) {
-            l = new Villager(this.game,x,y,'spr_ennemy_big_01');
+            l = new Villager(this.game,x,y,'spr_ennemy_small_01');
+            l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
            } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
             l = new Villager(this.game,x,y,'spr_ennemy_small_01');
+            l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
@@ -110,17 +112,22 @@ BasicGame.Game.prototype = {
 
             var w = Math.abs(box.w * scale_x);
             var h = Math.abs(box.h * scale_y);
-            var ry = 1152-y;
+            var ry = this.game.world.height-y;
             var rx = x;
             if ( box.w < 0) {
               rx += box.w * scale_x;
             }
             if ( box.h < 0) {
-              ry = 1152 - (y + box.h * scale_y);
+              ry = this.game.world.height - (y + box.h * scale_y);
             }
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
-           }
+          } else if ( element.name.match(re_spr_altar) ) {
+            l = new Altar(this.game, x, this.game.world.height - y);
+            l.y -= l.height;
+            this.game.add.existing(l);
+            this.parallax_level2.add( l );
+          }
          }
        }
      }

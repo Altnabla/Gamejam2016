@@ -37,8 +37,6 @@ BasicGame.Game.prototype = {
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 200;
 
-
-
     // var test = new Props(this.game,100,100,'star');
     // this.game.add(test);
     // test.init();
@@ -51,7 +49,7 @@ BasicGame.Game.prototype = {
 
     var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
     background.fixedToCamera = true;
-    
+
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
     var saucer = new Saucer(this.game,100,100,'spaceship');
@@ -64,25 +62,7 @@ BasicGame.Game.prototype = {
 	},
 
 	update: function ( game ) {
-    if (this.cursors.up.isDown)
-    {
-        this.game.camera.y -= 4;
-    }
-    else if (this.cursors.down.isDown)
-    {
-        this.game.camera.y += 4;
-    }
 
-    if (this.cursors.left.isDown)
-    {
-      console.log( 'left' );
-        this.game.camera.x -= 4;
-    }
-    else if (this.cursors.right.isDown)
-    {
-      console.log( 'right' );
-        this.game.camera.x += 4;
-    }
 	},
 
 	quitGame: function (pointer) {

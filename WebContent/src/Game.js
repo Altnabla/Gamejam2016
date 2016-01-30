@@ -58,20 +58,6 @@ BasicGame.Game.prototype = {
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
 
-    // villagers randoms
-	 for(var i = 0;i<15;i++)
-	 {
-	 	var vilX = this.game.world.randomX;
-	 	var vilY = 100;
-	 	var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
-	 	this.game.add.existing(villager);
-	 	villager.init(villager);
-		this.villagers[i] = villager;
-	 }
-
-  //  var collide_box = new CollideBox(this.game, 400, 400, 400, 400);
-  //  this.parallax_level1.add( collide_box );
-
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;
@@ -93,15 +79,10 @@ BasicGame.Game.prototype = {
      var mapLayers = mapJSON.entity[0].animation;
      for (var i = 0; i < mapLayers.length; ++i) {
        var layer = mapLayers[ i ];
-       console.log( 'length:' + layer.timeline.length );
-       console.log( layer.timeline );
        for (var j = 0; j < layer.timeline.length; ++j ){
          var element = layer.timeline[ j ];
-         console.log( element.name );
          var x = element.key[0].object.x ? element.key[0].object.x : 0;
          var y = element.key[0].object.y ? element.key[0].object.y : 0;
-         console.log( 'x: ' + x );
-         console.log( 'y: ' + y );
          var l;
          if ( element.name ) {
            if ( element.name.match( re_l3_tile_02 ) ) {
@@ -139,13 +120,7 @@ BasicGame.Game.prototype = {
             }
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
-            // this.parallax_level1.add( collide_box );
-
-            // console.log( collide_box );
-
            }
-         } else {
-           console.log( 'not matchable' );
          }
        }
      }

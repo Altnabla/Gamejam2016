@@ -33,6 +33,11 @@ BasicGame.Preloader.prototype = {
 		// this.load.image('star', 'images/game/star.png');
 		this.load.image('spaceship', 'images/placeholders/spr_raoool.png');
 		this.load.image('villager-small-1','images/placeholders/spr_believer_small_01.png');
+		this.load.image('spr_altar', 'images/placeholders/spr_altar.png');
+		this.load.image('spr_ennemy_big_01', 'images/placeholders/spr_ennemy_big_01.png');
+		this.load.image('spr_ennemy_small_01', 'images/placeholders/spr_ennemy_small_01.png');
+
+		this.load.json('map', 'images/placeholders/map_01.scon');
 		// this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
 		this.load.image('bullet','images/placeholders/spr_bullet_01.png');
 		this.load.image('fx_ray','images/placeholders/fx_ray.png');

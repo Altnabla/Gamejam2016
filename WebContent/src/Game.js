@@ -33,14 +33,11 @@ BasicGame.Game.prototype = {
   },
 
 	create: function () {
-    this.game.world.setBounds(0, 0, 1024 * 2, 768 * 1.5);
+    this.game.world.setBounds(0, 0, 1024 * 4, 1152);
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 200;
 
-    // var test = new Props(this.game,100,100,'star');
-    // this.game.add(test);
-    // test.init();
-
+    // parallax
     this.parallax_level5 = this.game.add.group();
     this.parallax_level4 = this.game.add.group();
     this.parallax_level3 = this.game.add.group();
@@ -48,42 +45,73 @@ BasicGame.Game.prototype = {
     this.parallax_level1 = this.game.add.group();
     this.context_layer = this.game.add.group();
 
+    // parallax level 5: backgorund
     var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
     this.parallax_level5.add( background );
     background.fixedToCamera = true;
 
-    for (var i = 1 ; i < 3 ; ++i ) {
-      var f = i -1;
-      var l = this.game.add.sprite( f * 1024, (768 * 1.5) - 1024, 'l2_tile_0' + i );
-      this.parallax_level2.add( l );
-    }
-
-    for (var i = 1 ; i < 3 ; ++i ) {
-      var f = i -1;
-      var l = this.game.add.sprite( f * 1024, (768 * 1.5) - 1024, 'l3_tile_0' + i );
-      this.parallax_level3.add( l );
-      l.fixedToCamera = true;
-    }
-
+    // input
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
+    // player: saucer
     this.saucer = new Saucer(this.game,100,100,'spaceship',this);
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
 
-
-	for(var i = 0;i<15;i++)
-	{
-		var vilX = this.game.world.randomX;
-		var vilY = 100;
-		var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
-		this.game.add.existing(villager);
-		villager.init(villager);
+    // villagers randoms
+	 for(var i = 0;i<15;i++)
+	 {
+	 	var vilX = this.game.world.randomX;
+	 	var vilY = 100;
+	 	var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
+	 	this.game.add.existing(villager);
+	 	villager.init(villager);
 		this.villagers[i] = villager;
-	}
+	 }
 
+    var re_l2_tile_01 = /l2_tile_01.*/;
+    var re_l2_tile_02 = /l2_tile_02.*/;
+    var re_spr_altar = /spr_altar.*/;
+    var re_spr_ennemy_big_01 = /spr_ennemy_big_01.*/;
+    var re_spr_ennemy_small_01 = /spr_ennemy_small_01.*/;
+    var re_l3_tile_01 = /l3_tile_01.*/;
+    var re_l3_tile_02 = /l3_tile_02.*/;
+
+    // map
+     var mapJSON = this.game.cache.getJSON('map');
+     var mapLayers = mapJSON.entity[0].animation;
+     for (var i = 0; i < mapLayers.length; ++i) {
+       var layer = mapLayers[ i ];
+       console.log( 'length:' + layer.timeline.length );
+       console.log( layer.timeline );
+       for (var j = 0; j < layer.timeline.length; ++j ){
+         var element = layer.timeline[ j ];
+         console.log( element.name );
+         var x = element.key[0].object.x ? element.key[0].object.x : 0;
+         var y = element.key[0].object.y ? element.key[0].object.y : 0;
+         console.log( 'x: ' + x );
+         console.log( 'y: ' + y );
+         var l;
+         if ( element.name ) {
+           if ( element.name.match( re_l3_tile_02 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
+           } else if ( element.name.match( re_l3_tile_01 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'l3_tile_01', this.parallax_level3, true);
+           } else if ( element.name.match( re_l2_tile_01 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'l2_tile_01', this.parallax_level2);
+           } else if ( element.name.match( re_l2_tile_02 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
+           }
+         } else {
+           console.log( 'not matchable' );
+         }
+       }
+     }
+
+
+    // camera
     this.game.camera.follow(this.saucer);
-    this.game.camera.deadzone = new Phaser.Rectangle( 100, 100, 1024 - 200, 768 - 350);
+    this.game.camera.deadzone = new Phaser.Rectangle( 200, 100, 1024 - 400, 768 - 350);
 
     console.log( this.game);
 	},

@@ -53,10 +53,11 @@ Saucer.prototype.ToggleTractorBeam = function(bActivate)
 		this.emitter.minParticleSpeed.set(5*px, 5*py);
 		this.emitter.maxParticleSpeed.set(5*px, 5*py);
 		this.emitter.on = true;
-		var pxL = 800 * Math.cos(rad - Math.PI/12);
-		var pyL = 800 * Math.sin(rad - Math.PI/12);
-		var pxR = 800 * Math.cos(rad + Math.PI/12);
-		var pyR = 800 * Math.sin(rad + Math.PI/12);
+		var div = 8;
+		var pxL = 800 * Math.cos(rad - Math.PI/div);
+		var pyL = 800 * Math.sin(rad - Math.PI/div);
+		var pxR = 800 * Math.cos(rad + Math.PI/div);
+		var pyR = 800 * Math.sin(rad + Math.PI/div);
 		var graphics = this.game.add.graphics(0, 0);
 		var poly = new Phaser.Polygon([ new Phaser.Point(tbeamX,tbeamY), new Phaser.Point(this.x+pxL, this.y+pyL), new Phaser.Point(this.x+pxR, this.y+pyR)]);
 		// graphics.clear();
@@ -73,7 +74,7 @@ Saucer.prototype.ToggleTractorBeam = function(bActivate)
 	}
 	else
 	{
-		this.emitter.on = false;	
+		this.emitter.on = false;
 	}
 }
 
@@ -89,21 +90,21 @@ Saucer.prototype.update = function() {
 	}
     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && this.angle > -60)
     {
-		this.currentRotL = 30; 
+		this.currentRotL = 30;
     }
     else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && this.angle < 60)
     {
-		this.currentRotR = 30; 
+		this.currentRotR = 30;
     }
 	else
 	{
 		if(this.currentRotL > 0)
 		{
-			this.currentRotL -= this.game.time.elapsed *0.1; 
+			this.currentRotL -= this.game.time.elapsed *0.1;
 		}
 		if(this.currentRotR > 0)
 		{
-			this.currentRotR -= this.game.time.elapsed *0.1; 
+			this.currentRotR -= this.game.time.elapsed *0.1;
 		}
 	}
 	if(this.currentRotR > this.currentRotL)

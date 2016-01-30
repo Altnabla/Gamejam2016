@@ -47,6 +47,8 @@ BasicGame.Game.prototype = {
     this.parallax_level4 = this.game.add.group();
     this.parallax_level3 = this.game.add.group();
     this.parallax_level2 = this.game.add.group();
+    this.parallax_level2b = this.game.add.group();
+    this.parallax_level2c = this.game.add.group();
     this.parallax_level1 = this.game.add.group();
     this.context_layer = this.game.add.group();
 
@@ -62,6 +64,7 @@ BasicGame.Game.prototype = {
     this.saucer = new Saucer(this.game,100,100,'spaceship',this);
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
+    // this.saucer.body.setCollisionGroup( villagerCollisionGroup );
 
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
@@ -104,14 +107,19 @@ BasicGame.Game.prototype = {
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+            this.parallax_level2c.add( l );
 
-        		l.body.setCollisionGroup( villagerCollisionGroup );
+        		// l.body.setCollisionGroup( villagerCollisionGroup );
+            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
            } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
             l = new Villager(this.game,x,y,'spr_ennemy_small_01');
             l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+            this.parallax_level2c.add( l );
+            // l.body.setCollisionGroup( villagerCollisionGroup );
+            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
           } else if ( element.name.match( re_box ) ) {
             var box = collideBoxes[ element.name ];
             var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
@@ -132,10 +140,9 @@ BasicGame.Game.prototype = {
           } else if ( element.name.match(re_spr_altar) ) {
             l = new Altar(this.game, x, this.game.world.height - y);
             // l.y -= l.height;
+            this.altar = l;
             this.game.add.existing(l);
-            this.parallax_level2.add( l );
-            l.body.setCollisionGroup(altarCollisionGroup);
-            l.body.collides( villagerCollisionGroup, l.hitAltar, l);
+            this.parallax_level2b.add( l );
           }
          }
        }
@@ -153,7 +160,30 @@ BasicGame.Game.prototype = {
 
     this.parallax_level3.x = - this.game.camera.x * 0.6;
     this.parallax_level3.y = - this.game.camera.y * 0.6;
+
+    for (var i = 0; i < this.villagers.length; ++i) {
+
+      if (this.checkOverlap(this.altar, this.villagers[ i ]))
+      {
+        this.villagers[ i ].alpha = 0.3;
+        console.log( 'Drag the sprites. Overlapping: true' );
+      }
+      else
+      {
+        //console.log( 'Drag the sprites. Overlapping: false' );
+      }
+    }
 	},
+
+
+ checkOverlap: function(spriteA, spriteB) {
+
+    var boundsA = spriteA.getBounds();
+    var boundsB = spriteB.getBounds();
+
+    return Phaser.Rectangle.intersects(boundsA, boundsB);
+
+},
 
   __render: function() {
 

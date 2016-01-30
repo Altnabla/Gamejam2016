@@ -41,7 +41,7 @@ BasicGame.Preloader.prototype = {
 		}
 
 		// parallax level 3
-		for ( var i = 1; i < 2; ++i ) {
+		for ( var i = 1; i < 3; ++i ) {
 			this.load.image( 'l3_tile_0' + i, 'images/placeholders/l3_tile_0' + i + '.png' );
 		}
 

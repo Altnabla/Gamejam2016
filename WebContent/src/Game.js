@@ -58,6 +58,15 @@ BasicGame.Game.prototype = {
     this.game.add.existing(saucer);
     saucer.init(saucer);
 
+	for(var i = 0;i<15;i++)
+	{
+		var vilX = this.game.world.randomX;
+		var vilY = 100;
+		var villager = new Villager(this.game,vilX,vilY,'villager-small-1');
+		this.game.add.existing(villager);
+		villager.init(villager);
+	}
+	
     this.game.camera.follow(saucer);
 
     console.log( this.game);

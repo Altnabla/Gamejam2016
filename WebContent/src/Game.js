@@ -30,16 +30,35 @@ BasicGame.Game.prototype = {
 
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
-
   },
 
 	create: function () {
+    this.game.world.setBounds(0, 0, 1024 * 6, 768 * 1.5);
     this.physics.startSystem(Phaser.Physics.P2JS);
-	this.physics.p2.gravity.y = 200;
+  	this.physics.p2.gravity.y = 200;
 
-	var test = new Saucer(this.game,100,100,'spaceship');
-	this.game.add.existing(test);
-	test.init(test);
+
+
+    // var test = new Props(this.game,100,100,'star');
+    // this.game.add(test);
+    // test.init();
+
+    this.parallax_level5 = this.game.add.group();
+    this.parallax_level4 = this.game.add.group();
+    this.parallax_level3 = this.game.add.group();
+    this.parallax_level2 = this.game.add.group();
+    this.parallax_level1 = this.game.add.group();
+
+    var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
+    background.fixedToCamera = true;
+    
+    this.cursors = this.game.input.keyboard.createCursorKeys();
+
+    var saucer = new Saucer(this.game,100,100,'spaceship');
+    this.game.add.existing(saucer);
+    saucer.init(saucer);
+
+    this.game.camera.follow(saucer);
 
     console.log( this.game);
 	},

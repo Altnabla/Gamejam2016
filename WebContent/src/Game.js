@@ -36,34 +36,15 @@ BasicGame.Game.prototype = {
 	create: function () {
 		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 
-    this.startfield = this.game.add.group();
-    for (var i = 0; i < 128; i++) {
-      this.startfield.add( new Star( this.game ), false );
-    }
-
-    this.obstacles = this.game.add.group();
-    this.obstacles.add( new Asteroid( this.game ) );
-
-    this.player = this.game.add.group();
-    this.spaceship = new Spaceship( this.game );
-    this.player.add( this.spaceship );
-
-    this.spaceship.spawn();
+	var test = new Props(this.game,100,100,'star');
+	this.game.add(test);
+	test.init();
+	
     console.log( this.game);
 	},
 
 	update: function ( game ) {
-    this.starSpawnTimer += game._deltaTime;
-    if ( this.starSpawnTimer > this.starSpawnFrequency ) {
-      var starToGenerate = this.starSpawnTimer / this.starSpawnFrequency;
-      for( var i = 1; i < starToGenerate; ++i ) {
-        var star = this.startfield.getFirstExists( false );
-        if (star) {
-          star.spawn();
-        }
-      }
-      this.starSpawnTimer = this.starSpawnTimer % this.starSpawnFrequency;
-    }
+    
 	},
 
 	quitGame: function (pointer) {

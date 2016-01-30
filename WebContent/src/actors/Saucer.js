@@ -56,8 +56,3 @@ Saucer.prototype.update = function() {
 	}
 
 };
-
-Saucer.prototype.render = function() {
-
-
-}

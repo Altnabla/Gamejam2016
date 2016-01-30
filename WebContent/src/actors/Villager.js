@@ -54,7 +54,14 @@ Villager.prototype.attract = function(saucerbeam) {
     // this.body.rotation = angle + this.game.math.degToRad(90); 
     this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject 
     this.body.force.y = Math.sin(angle) * this.speed;
-	
+}
+
+Villager.prototype.PlayFallingAnimation = function(bIsOn)
+{
+	this.loadTexture('spr_enemy_idle', 0);
+    this.animations.add('idle');
+    this.animations.play('idle', 3, true);
+
 }
 
 Villager.prototype.update = function() {

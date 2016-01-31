@@ -32,8 +32,8 @@ SoundManager = function (game, gameinstance) {
 	this.snd_soucoupe_move = this.game.add.audio('snd_soucoupe_move');
 	this.snd_soucoupe_rayon = this.game.add.audio('snd_soucoupe_rayon');
 
-
-
+	this.snd_game_victory = this.game.add.audio('snd_game_victory');
+	this.snd_game_defeat = this.game.add.audio('snd_game_defeat');
 
 	
 	this.init = function(self)
@@ -57,6 +57,11 @@ SoundManager.prototype.StartMusic = function()
 	this.musicFideles.loopFull();
 };
 
+SoundManager.prototype.StopMusic = function()
+{
+	this.musicRaoool.stop();
+	this.musicFideles.stop();
+};
 
 
 SoundManager.prototype.SetVolume = function(__value)
@@ -68,8 +73,9 @@ SoundManager.prototype.SetVolume = function(__value)
 
 SoundManager.prototype.update = function()
 {
-	this.musicRaoool.volume = 1;
-	this.musicFideles.volume = 0;
+	saucerPosRatio = this.gameinstance.saucer.x / this.gameinstance.world.width;
+	this.musicRaoool.volume = 1-saucerPosRatio;
+	this.musicFideles.volume = saucerPosRatio;
 };
 
 
@@ -80,6 +86,7 @@ SoundManager.prototype.update = function()
 
 SoundManager.prototype.playSnd_fidele_angry = function()
 {
+	this.snd_fidele_angry_01.volume = .2;
 	this.snd_fidele_angry_01.play();
 };
 
@@ -112,21 +119,29 @@ SoundManager.prototype.playSnd_fidele_splash = function()
 	snd.play();
 };
 
+
+
+
 SoundManager.prototype.playSnd_raoool_gimick = function()
 {
 	this.snd_raoool_gimick.play();
 };
+
+
 
 SoundManager.prototype.playSnd_ritual_fidele = function()
 {
 	sounds = [this.snd_ritual_fidele_01, this.snd_ritual_fidele_02, this.snd_ritual_fidele_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
+	snd.volume = .1;
 	snd.play();
 };
 
 SoundManager.prototype.playSnd_ritual_raoool = function()
 {
+	// LOOPP
+
 	sounds = [this.snd_ritual_raoool_01, this.snd_ritual_raoool_02, this.snd_ritual_raoool_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
@@ -145,6 +160,7 @@ SoundManager.prototype.playSnd_soucoupe_hit = function()
 	sounds = [this.snd_soucoupe_hit_01, this.snd_soucoupe_hit_02, this.snd_soucoupe_hit_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
+	snd.volume = .7;
 	snd.play();
 };
 
@@ -157,6 +173,7 @@ SoundManager.prototype.playSnd_soucoupe_move = function()
 {
 	if(this.snd_soucoupe_move.isPlaying)
 		return;
+	this.snd_soucoupe_move.volume = .4;
 	this.snd_soucoupe_move.loopFull();
 };
 SoundManager.prototype.stopSnd_soucoupe_move = function()
@@ -175,3 +192,22 @@ SoundManager.prototype.stopSnd_soucoupe_rayon = function()
 {
 	this.snd_soucoupe_rayon.stop();
 };
+
+
+
+
+
+SoundManager.prototype.playSnd_victory = function()
+{
+	this.StopMusic();
+	this.snd_game_victory.play();
+};
+
+SoundManager.prototype.playSnd_defeat = function()
+{
+	this.StopMusic();
+	this.snd_game_defeat.play();
+};
+
+
+

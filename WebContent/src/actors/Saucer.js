@@ -45,9 +45,6 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	};
 
 	this.hitten = function(self) {
-		console.log('hitten');
-		Phaser.Easing.Bounce.InOut
-
 		var tween = this.game.add.tween(self);
 		tween.from({ alpha: 0.5 }, 100, Phaser.Easing.Bounce.InOut, true, 0);
 	};

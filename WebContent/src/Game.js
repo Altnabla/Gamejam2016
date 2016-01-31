@@ -176,6 +176,8 @@ BasicGame.Game.prototype = {
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
     this.soundManager.StartMusic();
 
+    this.game.soundManager = this.soundManager;
+
 
     console.log( this.game);
 
@@ -208,7 +210,9 @@ BasicGame.Game.prototype = {
         // sound manager update
         this.soundManager.update();
 
-        //this.end();
+        if (this.villagers.length == 0){
+          tis.end();
+        }
 
 
 	},

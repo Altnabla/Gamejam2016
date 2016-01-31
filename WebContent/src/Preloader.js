@@ -70,8 +70,6 @@ BasicGame.Preloader.prototype = {
         this.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
 
         this.soundsToDecode = ['musicRaoool', 'musicFideles'];
-
->>>>>>> 47d3a25b8647840da6752712ae0365e183171f15
 	},
 
 	create: function () {

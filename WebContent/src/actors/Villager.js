@@ -140,7 +140,7 @@ Villager.prototype.attack = function()
 	{
 		this.Shoot(this.game.saucer.x,this.game.saucer.y);
 	}
-	this.shootCD = 30;
+	this.shootCD = 15;
 }
 
 Villager.prototype.PlayFallingAnimation = function()
@@ -185,7 +185,7 @@ Villager.prototype.update = function() {
 				this.PlayFallingAnimation();
 			}
 			// this.body.angularRotation += Math.random();
-			else if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
+			else if(Math.abs(distX) < 300 && Math.abs(distY) < 300)
 			{
 				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
 				this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject

@@ -35,21 +35,10 @@ Saucer = function (game, x, y, texture, gameinstance) {
 
 	this.hitten = function(self) {
 		console.log('hitten');
-// 		*  someSprite.filters = [
-// *      new GlowFilter(renderer.width, renderer.height, 15, 2, 1, 0xFF0000, 0.5)
-// *  ];
-		var viewWidth = 100;
-		var viewHeight = 100;
-		var distance = 15;
-		var outerStrength = 2;
-		var innerStrength = 1;
-		var color = 0xFF0000;
-		var quality = 0.5;
+		Phaser.Easing.Bounce.InOut
 
-		// self.filters = [self.gray];
-
-		// self.filters = [ new PIXI.filters.GlowFilter(viewWidth, viewHeight, distance, outerStrength, innerStrength, color, quality) ];
-
+		var tween = this.game.add.tween(self);
+		tween.from({ alpha: 0.5 }, 100, Phaser.Easing.Bounce.InOut, true, 0);
 	};
 };
 

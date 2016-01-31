@@ -80,6 +80,7 @@ SoundManager.prototype.update = function()
 
 SoundManager.prototype.playSnd_fidele_angry = function()
 {
+	this.snd_fidele_angry_01.volume = .2;
 	this.snd_fidele_angry_01.play();
 };
 
@@ -112,21 +113,29 @@ SoundManager.prototype.playSnd_fidele_splash = function()
 	snd.play();
 };
 
+
+
+
 SoundManager.prototype.playSnd_raoool_gimick = function()
 {
 	this.snd_raoool_gimick.play();
 };
+
+
 
 SoundManager.prototype.playSnd_ritual_fidele = function()
 {
 	sounds = [this.snd_ritual_fidele_01, this.snd_ritual_fidele_02, this.snd_ritual_fidele_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
+	snd.volume = .1;
 	snd.play();
 };
 
 SoundManager.prototype.playSnd_ritual_raoool = function()
 {
+	// LOOPP
+
 	sounds = [this.snd_ritual_raoool_01, this.snd_ritual_raoool_02, this.snd_ritual_raoool_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
@@ -145,6 +154,7 @@ SoundManager.prototype.playSnd_soucoupe_hit = function()
 	sounds = [this.snd_soucoupe_hit_01, this.snd_soucoupe_hit_02, this.snd_soucoupe_hit_03];
 	index = Math.floor(Math.random() * sounds.length);
 	snd = sounds[index];
+	snd.volume = .7;
 	snd.play();
 };
 
@@ -157,6 +167,7 @@ SoundManager.prototype.playSnd_soucoupe_move = function()
 {
 	if(this.snd_soucoupe_move.isPlaying)
 		return;
+	this.snd_soucoupe_move.volume = .4;
 	this.snd_soucoupe_move.loopFull();
 };
 SoundManager.prototype.stopSnd_soucoupe_move = function()

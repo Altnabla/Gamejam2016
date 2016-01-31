@@ -33,6 +33,8 @@ Projectile.prototype.blockHit = function(body, bodyB, shapeA, shapeB, equation) 
 			if (body.sprite) {
 				if (body.sprite.key == 'spaceship') {
 					body.sprite.hitten( body.sprite );
+                    // snd
+                    this.game.soundManager.playSnd_soucoupe_hit(); 
 				}
 			}
 		this.kill();

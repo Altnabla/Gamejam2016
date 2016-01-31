@@ -61,6 +61,8 @@ Villager.prototype.Pray = function()
     this.animations.play('ritual', 10, true);
 	this.angle = 0;
 	this.villagerState = this.States.PRAYING;	
+	// snd
+	this.game.soundManager.playSnd_ritual_fidele();			
 }
 Villager.prototype.endPray = function()
 {
@@ -112,6 +114,8 @@ Villager.prototype.Shoot = function(x,y)
 	projectile.animations.play('projectile', 8, true);
 	projectile.body.rotateLeft(200);
 	this.villagerState = this.States.IDLE;
+	// snd
+	this.game.soundManager.playSnd_fidele_shoot();		
 }
 
 Villager.prototype.attract = function(saucerbeam) {
@@ -132,6 +136,8 @@ Villager.prototype.PrepareAttack = function()
 	this.angle = 0;
 	this.body.rotation = 0;
 	this.villagerState = this.States.PREPARING;
+	// snd
+	this.game.soundManager.playSnd_fidele_angry();		
 }
 
 Villager.prototype.attack = function()
@@ -159,6 +165,9 @@ Villager.prototype.Zombify = function()
 		this.loadTexture('spr_believer_ritual', 0);
 		this.animations.add('zombie');
 		this.animations.play('zombie', 10, true);
+		// snd
+		this.game.soundManager.playSnd_fidele_drop_autel();
+		this.game.soundManager.playSnd_ritual_raoool();
 	}
 }
 
@@ -183,6 +192,8 @@ Villager.prototype.update = function() {
 			{
 				this.villagerState = this.States.FALLING;
 				this.PlayFallingAnimation();
+				// snd
+				this.game.soundManager.playSnd_fidele_aspire();	
 			}
 			// this.body.angularRotation += Math.random();
 			else if(Math.abs(distX) < 300 && Math.abs(distY) < 300)

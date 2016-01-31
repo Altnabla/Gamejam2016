@@ -66,11 +66,42 @@ BasicGame.Preloader.prototype = {
 
 
 
-		// sounds
+		// Musics
 		this.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
         this.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
 
-        this.soundsToDecode = ['musicRaoool', 'musicFideles'];
+        // Sounds
+        this.load.audio('snd_fidele_angry_01', 'audio/sfx/fidele_angry_01.mp3');
+        this.load.audio('snd_fidele_aspire_01', 'audio/sfx/fidele_aspire_01.mp3');
+        this.load.audio('snd_fidele_aspire_02', 'audio/sfx/fidele_aspire_02.mp3');
+        this.load.audio('snd_fidele_aspire_03', 'audio/sfx/fidele_aspire_03.mp3');
+        this.load.audio('snd_fidele_drop_autel', 'audio/sfx/fidele_drop_autel.mp3');
+        this.load.audio('snd_fidele_shoot_01', 'audio/sfx/fidele_shoot_01.mp3');
+        this.load.audio('snd_fidele_shoot_02', 'audio/sfx/fidele_shoot_02.mp3');
+        this.load.audio('snd_fidele_splash_01', 'audio/sfx/fidele_splash_01.mp3');
+        this.load.audio('snd_fidele_splash_02', 'audio/sfx/fidele_splash_02.mp3');
+        this.load.audio('snd_raoool_gimick', 'audio/sfx/raoool_gimick.mp3');
+        this.load.audio('snd_ritual_fidele_01', 'audio/sfx/ritual_fidele_01.mp3');
+        this.load.audio('snd_ritual_fidele_02', 'audio/sfx/ritual_fidele_02.mp3');
+        this.load.audio('snd_ritual_fidele_03', 'audio/sfx/ritual_fidele_03.mp3');
+        this.load.audio('snd_ritual_raoool_01', 'audio/sfx/ritual_raoool_01.mp3');
+        this.load.audio('snd_ritual_raoool_02', 'audio/sfx/ritual_raoool_02.mp3');
+        this.load.audio('snd_ritual_raoool_03', 'audio/sfx/ritual_raoool_03.mp3');
+        this.load.audio('snd_soucoupe_explode', 'audio/sfx/soucoupe_explode.mp3');
+        this.load.audio('snd_soucoupe_hit_01', 'audio/sfx/soucoupe_hit_01.mp3');
+        this.load.audio('snd_soucoupe_hit_02', 'audio/sfx/soucoupe_hit_02.mp3');
+        this.load.audio('snd_soucoupe_hit_03', 'audio/sfx/soucoupe_hit_03.mp3');
+        this.load.audio('snd_soucoupe_move', 'audio/sfx/soucoupe_move.mp3');
+        this.load.audio('snd_soucoupe_rayon', 'audio/sfx/soucoupe_rayon.mp3');
+
+
+
+        this.soundsToDecode = ['musicRaoool', 'musicFideles', 'snd_fidele_angry_01', 'snd_fidele_aspire_01', 'snd_fidele_aspire_02', 'snd_fidele_aspire_03', 'snd_fidele_drop_autel', 
+        	'snd_fidele_shoot_01', 'snd_fidele_shoot_02', 'snd_fidele_splash_01', 'snd_fidele_splash_02', 'snd_raoool_gimick',
+        	'snd_ritual_fidele_01', 'snd_ritual_fidele_02', 'snd_ritual_fidele_03', 'snd_ritual_raoool_01', 'snd_ritual_raoool_02', 'snd_ritual_raoool_03', 'snd_soucoupe_explode',  
+        	'snd_soucoupe_hit_01', 'snd_soucoupe_hit_02', 'snd_soucoupe_hit_03', 'snd_soucoupe_move', 'snd_soucoupe_rayon'
+		];
+
 	},
 
 	create: function () {

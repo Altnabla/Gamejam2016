@@ -47,9 +47,9 @@ BasicGame.Game.prototype = {
     this.parallax_level5 = this.game.add.group();
     this.parallax_level4 = this.game.add.group();
     this.parallax_level3 = this.game.add.group();
-    this.parallax_level2 = this.game.add.group();
-    this.parallax_level2b = this.game.add.group();
     this.parallax_level2c = this.game.add.group();
+    this.parallax_level2b = this.game.add.group();
+    this.parallax_level2 = this.game.add.group();
     this.parallax_level1 = this.game.add.group();
     this.context_layer = this.game.add.group();
 
@@ -85,6 +85,20 @@ BasicGame.Game.prototype = {
     var re_l3_tile_02 = /l3_tile_02.*/;
     var re_l2_tile_03 = /l2_tile_03.*/;
     var re_box = /box.*/;
+    var re_poteau_base_altar = /poteau_base_altar.*/;
+    var re_poteau_base_neutre = /poteau_base_neutre.*/;
+    var re_terrace_base_altar = /terrace_base_altar.*/;
+    var re_terrace_base_neutre = /terrace_base_neutre.*/;
+    var re_tile_hill_1 = /tile_hill_1.*/;
+    var re_tile_hill_2 = /tile_hill_2.*/;
+    var re_tile_hill_3 = /tile_hill_3.*/;
+    var re_tile_hill_4 = /tile_hill_4.*/;
+    var re_tile_hill_5 = /tile_hill_5.*/;
+    var re_tile_hill_1b = /tile_hill_1b.*/;
+    var re_tile_hill_2b = /tile_hill_2b.*/;
+    var re_tile_hill_3b = /tile_hill_3b.*/;
+    var re_tile_hill_4b = /tile_hill_4b.*/;
+    var re_tile_hill_5b = /tile_hill_5b.*/;
 
      var mapJSON = this.game.cache.getJSON('map');
      var mapBoxes = mapJSON.entity[0].obj_info;
@@ -109,6 +123,34 @@ BasicGame.Game.prototype = {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
            } else if ( element.name.match( re_l3_tile_01 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_01', this.parallax_level3, true);
+           }else if ( element.name.match( re_tile_hill_1 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_1', this.parallax_level2);
+           }else if ( element.name.match( re_tile_hill_2 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_2', this.parallax_level2);
+           }else if ( element.name.match( re_tile_hill_3 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_2', this.parallax_level2);
+           }else if ( element.name.match( re_tile_hill_4 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_4', this.parallax_level2);
+           }else if ( element.name.match( re_tile_hill_5 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_5', this.parallax_level2);
+           }else if ( element.name.match( re_poteau_base_altar ) ) {
+             new ParallaxLevelX( this.game, x, y, 'poteau_base_altar', this.parallax_level2);
+           }else if ( element.name.match( re_poteau_base_neutre ) ) {
+             new ParallaxLevelX( this.game, x, y, 'poteau_base_neutre', this.parallax_level2);
+           }else if ( element.name.match( re_terrace_base_altar ) ) {
+             new ParallaxLevelX( this.game, x, y, 'terrace_base_altar', this.parallax_level2);
+           }else if ( element.name.match( re_terrace_base_neutre ) ) {
+             new ParallaxLevelX( this.game, x, y, 'terrace_base_neutre', this.parallax_level2);
+           }else if ( element.name.match( re_tile_hill_1b ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_1b', this.parallax_level2b);
+           }else if ( element.name.match( re_tile_hill_2b ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_2b', this.parallax_level2b);
+           }else if ( element.name.match( re_tile_hill_3b ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_3b', this.parallax_level2b);
+           }else if ( element.name.match( re_tile_hill_4b ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_4b', this.parallax_level2b);
+           }else if ( element.name.match( re_tile_hill_5b ) ) {
+             new ParallaxLevelX( this.game, x, y, 'tile_hill_5b', this.parallax_level2b);
            } else if ( element.name.match( re_l2_tile_03 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_03', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_01 ) ) {

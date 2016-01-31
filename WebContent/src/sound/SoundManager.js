@@ -68,8 +68,9 @@ SoundManager.prototype.SetVolume = function(__value)
 
 SoundManager.prototype.update = function()
 {
-	this.musicRaoool.volume = 1;
-	this.musicFideles.volume = 0;
+	saucerPosRatio = this.gameinstance.saucer.x / this.gameinstance.world.width;
+	this.musicRaoool.volume = 1-saucerPosRatio;
+	this.musicFideles.volume = saucerPosRatio;
 };
 
 

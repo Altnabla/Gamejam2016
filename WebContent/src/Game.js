@@ -178,7 +178,6 @@ BasicGame.Game.prototype = {
 
     console.log( this.game);
 
-    this.end();
 	},
 
 	update: function ( game ) {
@@ -189,10 +188,10 @@ BasicGame.Game.prototype = {
     this.parallax_level5.x = - this.game.camera.x * 0.1;
     this.parallax_level5.y = - this.game.camera.y * 0.2;
 
-	
+
 	var keep = [];
     for (var i = 0; i < this.villagers.length; ++i) {
-	  var villager = this.villagers[ i ];	
+	  var villager = this.villagers[ i ];
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
         villager.Zombify();
@@ -203,10 +202,13 @@ BasicGame.Game.prototype = {
 		keep.push(villager);
       }
     }
-	
+
 	this.villagers = keep;
         // sound manager update
         this.soundManager.update();
+
+        //this.end();
+
 
 	},
 

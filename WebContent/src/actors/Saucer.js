@@ -59,7 +59,7 @@ Saucer.prototype.ToggleTractorBeam = function(bActivate)
 		var pxR = 800 * Math.cos(rad + Math.PI/div);
 		var pyR = 800 * Math.sin(rad + Math.PI/div);
 		var graphics = this.game.add.graphics(0, 0);
-		var poly = new Phaser.Polygon([ new Phaser.Point(tbeamX,tbeamY), new Phaser.Point(this.x+pxL, this.y+pyL), new Phaser.Point(this.x+pxR, this.y+pyR)]);
+		var poly = new Phaser.Polygon([ new Phaser.Point(originX,originY), new Phaser.Point(this.x+pxL, this.y+pyL), new Phaser.Point(this.x+pxR, this.y+pyR)]);
 		// graphics.clear();
 		// graphics.beginFill(0xFF33ff);
 		 // graphics.drawPolygon(poly.points);

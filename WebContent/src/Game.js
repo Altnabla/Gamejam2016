@@ -35,7 +35,7 @@ BasicGame.Game.prototype = {
 	create: function () {
     this.game.world.setBounds(0, 0, 1024 * 4, 1152);
     this.physics.startSystem(Phaser.Physics.P2JS);
-  	this.physics.p2.gravity.y = 200;
+  	this.physics.p2.gravity.y = 100;
     this.physics.p2.setImpactEvents(true);
 
     var altarCollisionGroup = this.game.physics.p2.createCollisionGroup();
@@ -62,7 +62,8 @@ BasicGame.Game.prototype = {
     this.saucer = new Saucer(this.game,100,100,'spaceship',this);
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
-
+	this.game.saucer = this.saucer;
+	
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;

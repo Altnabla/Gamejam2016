@@ -70,11 +70,13 @@ BasicGame.Game.prototype = {
     this.cursors = this.game.input.keyboard.createCursorKeys();
 
     // player: saucer
-    this.saucer = new Saucer(this.game,100,100,'spaceship',this);
+    this.saucer = new Saucer(this.game, 100, 100,'spaceship',this);
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
+    this.game.saucer = this.saucer;
 
-	this.game.saucer = this.saucer;
+    // map
+
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;
@@ -85,7 +87,6 @@ BasicGame.Game.prototype = {
     var re_l2_tile_03 = /l2_tile_03.*/;
     var re_box = /box.*/;
 
-    // map
      var mapJSON = this.game.cache.getJSON('map');
      var mapBoxes = mapJSON.entity[0].obj_info;
      var collideBoxes = {};
@@ -93,6 +94,8 @@ BasicGame.Game.prototype = {
      for (var i = 0; i < mapBoxes.length; ++i) {
        collideBoxes[ mapBoxes[ i ].name ] = mapBoxes[ i ];
      }
+
+     var altar_x = 100;
 
      var mapLayers = mapJSON.entity[0].animation;
      for (var i = 0; i < mapLayers.length; ++i) {
@@ -139,6 +142,7 @@ BasicGame.Game.prototype = {
           } else if ( element.name.match(re_spr_altar) ) {
             instance = new Altar(this.game, x, this.game.world.height - y);
             instance.y -= 2*instance.height/2;
+            altar_x = x + instance.width / 2;
             // instance.x -= instance.width
 			      this.altar = instance;
             this.game.add.existing(instance);
@@ -147,6 +151,10 @@ BasicGame.Game.prototype = {
          }
        }
      }
+
+     // start saucer
+    this.saucer.body.x = altar_x;
+    this.saucer.pushDown( this.saucer );
 
 
     // camera

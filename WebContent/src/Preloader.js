@@ -94,12 +94,17 @@ BasicGame.Preloader.prototype = {
         this.load.audio('snd_soucoupe_move', 'audio/sfx/soucoupe_move.mp3');
         this.load.audio('snd_soucoupe_rayon', 'audio/sfx/soucoupe_rayon.mp3');
 
+		this.load.audio('snd_game_victory', 'audio/sfx/game_victory.mp3');
+		this.load.audio('snd_game_defeat', 'audio/sfx/game_defeat.mp3');
+        
+
 
 
         this.soundsToDecode = ['musicRaoool', 'musicFideles', 'snd_fidele_angry_01', 'snd_fidele_aspire_01', 'snd_fidele_aspire_02', 'snd_fidele_aspire_03', 'snd_fidele_drop_autel', 
         	'snd_fidele_shoot_01', 'snd_fidele_shoot_02', 'snd_fidele_splash_01', 'snd_fidele_splash_02', 'snd_raoool_gimick',
         	'snd_ritual_fidele_01', 'snd_ritual_fidele_02', 'snd_ritual_fidele_03', 'snd_ritual_raoool_01', 'snd_ritual_raoool_02', 'snd_ritual_raoool_03', 'snd_soucoupe_explode',  
         	'snd_soucoupe_hit_01', 'snd_soucoupe_hit_02', 'snd_soucoupe_hit_03', 'snd_soucoupe_move', 'snd_soucoupe_rayon'
+        	,'snd_game_victory', 'snd_game_defeat'
 		];
 
 	},

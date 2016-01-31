@@ -32,8 +32,8 @@ SoundManager = function (game, gameinstance) {
 	this.snd_soucoupe_move = this.game.add.audio('snd_soucoupe_move');
 	this.snd_soucoupe_rayon = this.game.add.audio('snd_soucoupe_rayon');
 
-
-
+	this.snd_game_victory = this.game.add.audio('snd_game_victory');
+	this.snd_game_defeat = this.game.add.audio('snd_game_defeat');
 
 	
 	this.init = function(self)
@@ -57,6 +57,11 @@ SoundManager.prototype.StartMusic = function()
 	this.musicFideles.loopFull();
 };
 
+SoundManager.prototype.StopMusic = function()
+{
+	this.musicRaoool.stop();
+	this.musicFideles.stop();
+};
 
 
 SoundManager.prototype.SetVolume = function(__value)
@@ -187,3 +192,22 @@ SoundManager.prototype.stopSnd_soucoupe_rayon = function()
 {
 	this.snd_soucoupe_rayon.stop();
 };
+
+
+
+
+
+SoundManager.prototype.playSnd_victory = function()
+{
+	this.StopMusic();
+	this.snd_game_victory.play();
+};
+
+SoundManager.prototype.playSnd_defeat = function()
+{
+	this.StopMusic();
+	this.snd_game_defeat.play();
+};
+
+
+

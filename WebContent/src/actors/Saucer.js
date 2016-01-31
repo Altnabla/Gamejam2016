@@ -9,6 +9,9 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.gameinstance = gameinstance;
 	this.GameOverTimeLeft = 300;
 	this.TimeLeftText = game.add.text( 100, 700, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
+
+	this.life = 5;
+	this.maxLife = 5;
 	
 	this.init = function(self)
 	{
@@ -47,6 +50,14 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.hitten = function(self) {
 		var tween = this.game.add.tween(self);
 		tween.from({ alpha: 0.5 }, 100, Phaser.Easing.Bounce.InOut, true, 0);
+
+		this.life -= 1;
+		if(this.life <= 0)
+		{
+			// gameover
+			this.GameOver();
+			this.game.paused = true;
+		}
 	};
 	
 	this.decrTimeleft = function()
@@ -103,7 +114,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		labelCredit.fixedToCamra = true;
 
 		// sound lost
-		this.soundManager.playSnd_defeat();
+		this.gameinstance.soundManager.playSnd_defeat();
 		
 	};
 };

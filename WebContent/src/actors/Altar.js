@@ -7,10 +7,6 @@ Altar = function (game, x, y) {
   // this.body.collideWorldBounds = true;
   // this.body.static = true;
   // this.fixedToCamera = false;
-
-  this.hitAltar = function(altar, villager) {
-    villager.sprite.alpha = 0.3;
-  };
 };
 
 Altar.prototype = Object.create(Phaser.Sprite.prototype);

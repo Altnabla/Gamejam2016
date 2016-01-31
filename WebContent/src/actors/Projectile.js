@@ -6,8 +6,7 @@ Projectile = function (game, x, y, texture) {
 	{
 		Projectile.prototype.init(self);		
 		//  Check for the block hitting another object
-		self.body.onBeginContact.add(blockHit, self);
-
+		self.body.onBeginContact.add(self.blockHit, self);
 	}
 };
 
@@ -16,7 +15,7 @@ Projectile.prototype.constructor = Projectile;
 
 
 
-function blockHit (body, bodyB, shapeA, shapeB, equation) {
+Projectile.prototype.blockHit = function(body, bodyB, shapeA, shapeB, equation) {
 
     //  The block hit something.
     //  
@@ -31,8 +30,8 @@ function blockHit (body, bodyB, shapeA, shapeB, equation) {
     //  The first argument may be null or not have a sprite property, such as when you hit the world bounds.
     if (body)
     {
-        result = 'You last hit: ' + body.sprite.key;
-    }
+		this.kill();
+	}
     else
     {
         result = 'You last hit: The wall :)';

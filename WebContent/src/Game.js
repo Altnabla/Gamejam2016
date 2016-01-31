@@ -179,7 +179,10 @@ BasicGame.Game.prototype = {
 
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
-        this.villagers[ i ].alpha = 0.3;
+		var villager = this.villagers[ i ];	
+        villager.alpha = 0.3;
+		villager.villagerState = villager.States.ZOMBIE;
+
         // console.log( 'Drag the sprites. Overlapping: true' );
       }
       else

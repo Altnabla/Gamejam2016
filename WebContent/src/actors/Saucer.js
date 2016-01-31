@@ -119,6 +119,10 @@ Saucer.prototype.update = function() {
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
 	{
 		this.body.thrust(600);
+	} else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+	  this.body.thrust( -600 );
+	} else {
+		this.body.thrust(100);
 	}
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
 	{

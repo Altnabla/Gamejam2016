@@ -41,7 +41,7 @@ BasicGame.Game.prototype = {
 
 
 	create: function () {
-    this.game.world.setBounds(0, 0, 1024 * 4, 1152);
+    this.game.world.setBounds(0, 0, 1024 * 6, 1152);
     this.game.stage.backgroundColor = "#43c2ca";
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 100;
@@ -114,11 +114,11 @@ BasicGame.Game.prototype = {
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
            } else if ( element.name.match( re_spr_ennemy_big_01 ) || element.name.match( re_spr_ennemy_small_01 ) ) {
-				instance = new Villager(this.game,x,this.game.world.height - y ,'spr_ennemy_small_01');
-				this.game.add.existing(instance);
-				instance.init(instance);
-				this.villagers.push( instance );
-			  this.parallax_level2c.add( instance );
+             instance = new Villager(this.game,x,y,'spr_ennemy_small_01');
+             this.game.add.existing(instance);
+             instance.init(instance);
+             this.villagers.push( instance );
+             this.parallax_level2c.add( instance );
           } else if ( element.name.match( re_box ) ) {
             var box = collideBoxes[ element.name ];
             var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
@@ -151,7 +151,7 @@ BasicGame.Game.prototype = {
 
     // camera
     this.game.camera.follow(this.saucer);
-    this.game.camera.deadzone = new Phaser.Rectangle( 200, 100, 1024 - 400, 768 - 350);
+    this.game.camera.deadzone = new Phaser.Rectangle( 300, 100, 1024 - 600, 768 - 500);
 
     // Sound Manager
     this.soundManager = new SoundManager(this.game,this);

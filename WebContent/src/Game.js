@@ -207,7 +207,9 @@ BasicGame.Game.prototype = {
         // sound manager update
         this.soundManager.update();
 
-        //this.end();
+        if (this.villagers.length == 0){
+          tis.end();
+        }
 
 
 	},

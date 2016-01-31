@@ -27,7 +27,11 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		//	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
 		//	The 5000 value is the lifespan of each particle before it's killed
 		self.emitter.start(false, 5000, 100);
-	}
+	};
+
+	this.pushDown = function(self) {
+		self.body.thrust( -10000 );
+	};
 };
 
 Saucer.prototype = Object.create(PhysicsActor.prototype);

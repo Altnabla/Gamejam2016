@@ -183,7 +183,7 @@ BasicGame.Game.prototype = {
             }
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
-          } else if ( element.name.match(l2a_altar) ) {
+          } else if ( element.name.match(re_l2a_altar) ) {
             instance = new Altar(this.game, x, this.game.world.height - y);
             instance.y -= instance.height/2;
 			instance.y -= 32;

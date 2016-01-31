@@ -60,10 +60,9 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		this.life -= 1;
 		if(this.life <= 0)
 		{
-			// gameover
-			this.GameOver();
-			this.game.paused = true;
+			this.GameOverTimeLeft = 1;
 		}
+		this.LifeLeftText.setText("life : " + this.life + "/" + this.maxLife);
 	};
 
 	this.decrTimeleft = function()
@@ -88,7 +87,6 @@ Saucer = function (game, x, y, texture, gameinstance) {
 			else
 			{
 				this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
-				this.LifeLeftText.setText("life : " + this.life + "/" + this.maxLife);
 				
 				// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
 			}
@@ -97,30 +95,29 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.GameOver = function( ) {
 		var font1 = "45px square";
 		var font2 = "54px square";
-		var labelWinS = this.game.add.text( this.game.camera.x + window.innerWidth/2, 151, "You ran out of fuel !", { font: font2, fill: "#000" });
-		labelWinS.anchor.setTo(0.5, 0.5);
-		var labelWin = this.game.add.text( this.game.camera.x + window.innerWidth/2, 150, "You ran out of fuel !", { font: font2, fill: "#33FF33" });
-		labelWin.anchor.setTo(0.5, 0.5);
+		var labelWinS = this.game.add.text( this.game.camera.x, this.game.camera.y + 151, "You ran out of fuel !", { font: font2, fill: "#000" });
+		labelWinS.anchor.setTo(0);
+		var labelWin = this.game.add.text( this.game.camera.x , this.game.camera.y + 150, "You ran out of fuel !", { font: font2, fill: "#33FF33" });
+		labelWin.anchor.setTo(0);
+		
+		var labelThanksS = this.game.add.text( this.game.camera.x, this.game.camera.y +  251, "Thanks for playing", { font: font1, fill: "#000" });
+		labelThanksS.anchor.setTo(0);
 
-		var labelThanksS = this.game.add.text( this.game.camera.x + window.innerWidth/2 , 251, "Thanks for playing", { font: font1, fill: "#000" });
-		labelThanksS.anchor.setTo(0.5, 0.5);
+		var labelThanks = this.game.add.text( this.game.camera.x , this.game.camera.y +  250, "Thanks for playing", { font: font1, fill: "#33FF33" });
+		labelThanks.anchor.setTo(0);
 
-		var labelThanks = this.game.add.text( this.game.camera.x + window.innerWidth/2, 250, "Thanks for playing", { font: font1, fill: "#33FF33" });
-		labelThanks.anchor.setTo(0.5, 0.5);
+		var labelCreditS = this.game.add.text( this.game.camera.x ,this.game.camera.y +  551, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#000" });
+		labelCreditS.anchor.setTo(0);
 
-		var labelCreditS = this.game.add.text( this.game.camera.x + window.innerWidth/2, 551, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#000" });
-		labelCreditS.anchor.setTo(0.5, 0.5);
-
-		var labelCredit = this.game.add.text( this.game.camera.x + window.innerWidth/2, 550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
-		labelCredit.anchor.setTo(0.5, 0.5);
-
+		var labelCredit = this.game.add.text( this.game.camera.x ,this.game.camera.y +  550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
+		labelCredit.anchor.setTo(0);
+		
 		labelWinS.fixedToCamera = true;
 		labelWin.fixedToCamera = true;
 		labelThanksS.fixedToCamera = true;
 		labelThanks.fixedToCamera = true;
 		labelCreditS.fixedToCamera = true;
 		labelCredit.fixedToCamra = true;
-
 		// sound lost
 		this.gameinstance.soundManager.playSnd_defeat();
 	};

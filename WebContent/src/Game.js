@@ -82,6 +82,7 @@ BasicGame.Game.prototype = {
     var re_spr_ennemy_small_01 = /spr_ennemy_small_01.*/;
     var re_l3_tile_01 = /l3_tile_01.*/;
     var re_l3_tile_02 = /l3_tile_02.*/;
+    var re_l2_tile_03 = /l2_tile_03.*/;
     var re_box = /box.*/;
 
     // map
@@ -106,6 +107,8 @@ BasicGame.Game.prototype = {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
            } else if ( element.name.match( re_l3_tile_01 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_01', this.parallax_level3, true);
+           } else if ( element.name.match( re_l2_tile_03 ) ) {
+             new ParallaxLevelX( this.game, x, y, 'l2_tile_03', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_01 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_01', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_02 ) ) {
@@ -148,9 +151,9 @@ BasicGame.Game.prototype = {
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
             l = new Altar(this.game, x, this.game.world.height - y);
-            l.y -= 2*l.height/3;
+            l.y -= 2*l.height/2;
             l.x -= l.width/2;
-			this.altar = l;
+			      this.altar = l;
             this.game.add.existing(l);
             this.parallax_level2b.add( l );
           }
@@ -183,7 +186,7 @@ BasicGame.Game.prototype = {
 
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
-		var villager = this.villagers[ i ];	
+		var villager = this.villagers[ i ];
         villager.alpha = 0.3;
 		villager.villagerState = villager.States.ZOMBIE;
         // console.log( 'Drag the sprites. Overlapping: true' );

@@ -37,7 +37,7 @@ BasicGame.Preloader.prototype = {
 		this.load.image('spr_ennemy_big_01', 'images/placeholders/spr_ennemy_big_01.png');
 		this.load.image('spr_ennemy_small_01', 'images/placeholders/spr_ennemy_small_01.png');
 
-		this.load.json('map', 'images/placeholders/map_01.scon');
+		this.load.json('map', 'images/placeholders/map_02.scon');
 		// this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
 		this.load.spritesheet('spr_bullet_01','images/placeholders/spr_bullet_01.png',64,64,4);
 		this.load.image('fx_ray','images/placeholders/fx_ray.png');
@@ -46,7 +46,7 @@ BasicGame.Preloader.prototype = {
 		this.load.spritesheet('spr_enemy_walk', 'images/placeholders/spr_enemy_walk.png', 128, 128, 4);
 
 		// parallax level 2
-		for ( var i = 1; i < 3; ++i ) {
+		for ( var i = 1; i < 4; ++i ) {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );
 		}
 

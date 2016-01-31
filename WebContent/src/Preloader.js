@@ -45,6 +45,7 @@ BasicGame.Preloader.prototype = {
 		this.load.spritesheet('spr_enemy_falling', 'images/placeholders/spr_enemy_falling.png', 128, 128, 4);
 		this.load.spritesheet('spr_enemy_walk', 'images/placeholders/spr_enemy_walk.png', 128, 128, 4);
 		this.load.spritesheet('spr_enemy_attack','images/placeholders/spr_enemy_attack.png',128,128,27);
+		this.load.spritesheet('spr_enemy_ritual','images/placeholders/spr_enemy_ritual.png',128,128,20);
 		
 		// parallax level 2
 		for ( var i = 1; i < 4; ++i ) {

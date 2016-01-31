@@ -153,7 +153,13 @@ Villager.prototype.PlayFallingAnimation = function()
 
 Villager.prototype.Zombify = function()
 {
-	villager.villagerState = villager.States.ZOMBIE;
+	if(this.villagerState != this.States.ZOMBIE)
+	{
+		this.villagerState = this.States.ZOMBIE;
+		this.loadTexture('spr_believer_ritual', 0);
+		this.animations.add('zombie');
+		this.animations.play('zombie', 10, true);
+	}
 }
 
 Villager.prototype.update = function() {

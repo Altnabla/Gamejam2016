@@ -8,8 +8,15 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.emitter	 = "NULL";
 	this.gameinstance = gameinstance;
 	this.GameOverTimeLeft = 300;
-	this.TimeLeftText = game.add.text( 100, 75, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
-	this.TimeLeftText.x = game.width - 100 - this.TimeLeftText.width;
+
+	this.life = 5;
+	this.maxLife = 5;
+	
+	this.TimeLeftText = game.add.text( 100, 25, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
+	this.TimeLeftText.x = game.width - 50 - this.TimeLeftText.width;
+
+	this.LifeLeftText = game.add.text( 100, 50, "life : " + this.life + "/" + this.maxLife, { font: "30px square", fill: "#FFFFFF" });
+	this.LifeLeftText.x = game.width - 50 - this.LifeLeftText.width;
 
 	this.init = function(self)
 	{
@@ -23,7 +30,8 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	    self.emitter.makeParticles('fx_ray');
 		self.emitter.setAlpha(1, 0, 2000);
 		self.emitter.setScale(0.0, 2, 1, 1, 2000);
-		self.TimeLeftText.fixedToCamera = true;
+		self.TimeLeftText.fixedToCamera = true;		
+		self.LifeLeftText.fixedToCamera = true;
 		    //  Create our Timer
 		var timer = self.game.time.create(false);
 
@@ -48,6 +56,14 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.hitten = function(self) {
 		var tween = this.game.add.tween(self);
 		tween.from({ alpha: 0.5 }, 100, Phaser.Easing.Bounce.InOut, true, 0);
+
+		this.life -= 1;
+		if(this.life <= 0)
+		{
+			// gameover
+			this.GameOver();
+			this.game.paused = true;
+		}
 	};
 
 	this.decrTimeleft = function()
@@ -72,6 +88,8 @@ Saucer = function (game, x, y, texture, gameinstance) {
 			else
 			{
 				this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
+				this.LifeLeftText.setText("life : " + this.life + "/" + this.maxLife);
+				
 				// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
 			}
 		}
@@ -104,8 +122,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		labelCredit.fixedToCamra = true;
 
 		// sound lost
-		this.soundManager.playSnd_defeat();
-
+		this.gameinstance.soundManager.playSnd_defeat();
 	};
 };
 

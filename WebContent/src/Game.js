@@ -66,6 +66,10 @@ BasicGame.Game.prototype = {
     this.parallax_level5.add( background );
     background.fixedToCamera = true;
 
+    var holy_spawn = this.game.add.sprite(0, 0, 'holy_spawn');
+    this.parallax_level5.add( holy_spawn );
+    holy_spawn.fixedToCamera = true;
+
     // input
     this.cursors = this.game.input.keyboard.createCursorKeys();
 

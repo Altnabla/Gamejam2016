@@ -30,14 +30,6 @@ BasicGame.Game.prototype = {
 
 
 
-  preload:function(){
-        console.log("preloading assets");
-        // sounds
-        this.game.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
-        this.game.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
-
-  },
-
 
 
 	create: function () {
@@ -165,7 +157,8 @@ BasicGame.Game.prototype = {
     // Sound Manager
     this.soundManager = new SoundManager(this.game,this);
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
-    this.soundManager.Start();
+    this.soundManager.StartMusic();
+
 
     console.log( this.game);
 	},

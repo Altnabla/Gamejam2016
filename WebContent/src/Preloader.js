@@ -60,6 +60,15 @@ BasicGame.Preloader.prototype = {
 
 		// parallax level 5
 		this.load.image( 'l5_tile_01', 'images/placeholders/l5_tile_01.png' );
+
+
+
+		// sounds
+		this.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
+        this.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
+
+        this.soundsToDecode = ['musicRaoool', 'musicFideles'];
+
 	},
 
 	create: function () {
@@ -71,20 +80,21 @@ BasicGame.Preloader.prototype = {
 
 	update: function () {
 
-		//	You don't actually need to do this, but I find it gives a much smoother game experience.
-		//	Basically it will wait for our audio file to be decoded before proceeding to the MainMenu.
-		//	You can jump right into the menu if you want and still play the music, but you'll have a few
-		//	seconds of delay while the mp3 decodes - so if you need your music to be in-sync with your menu
-		//	it's best to wait for it to decode here first, then carry on.
+		if(this.ready)
+			return;
 
-		//	If you don't have any music in your game then put the game.state.start line into the create function and delete
-		//	the update function completely.
+		allSoundsLoaded = true;
+		for (var i in this.soundsToDecode)
+		{
+			if (! this.cache.isSoundDecoded(this.soundsToDecode[i]))
+				allSoundsLoaded = false;
+		}
 
-	//	if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
-	//	{
+		if (allSoundsLoaded)
+		{
 			this.ready = true;
 			this.state.start('MainMenu');
-	//	}
+		}
 
 	}
 

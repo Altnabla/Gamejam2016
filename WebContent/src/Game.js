@@ -176,7 +176,7 @@ BasicGame.Game.prototype = {
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
     this.soundManager.StartMusic();
 
-    this.soundManager = this.soundManager;
+    this.game.soundManager = this.soundManager;
 
     console.log( this.game);
 

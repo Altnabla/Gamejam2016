@@ -8,6 +8,7 @@ Villager = function (game, x, y, texture) {
 	this.States = {
 		IDLE : 0,
 		FALLING : 1,
+		PREPARING : 4,
 		ZOMBIE : 2,
 		ATTACKING : 3
 	}
@@ -16,7 +17,9 @@ Villager = function (game, x, y, texture) {
 	this.currentDestination = [0,0];
 	this.bIsMoving = false;
 	this.timeLeft = 0;
+	this.shootCD = 0;
 	this.speed = 300;
+	this.countAttractFailed = 0;
 	this.attractedBy = "";
 	this.init = function(self)
 	{
@@ -79,9 +82,8 @@ Villager.prototype.Shoot = function(x,y)
 	// projectile.angle = 0;
 	projectile.animations.add('projectile');
 	projectile.animations.play('projectile', 8, true);
-	// projectile.body.fixedRotation = true;
 	projectile.body.rotateLeft(200);
-
+	this.villagerState = this.States.IDLE;
 }
 
 Villager.prototype.attract = function(saucerbeam) {
@@ -90,14 +92,35 @@ Villager.prototype.attract = function(saucerbeam) {
     // this.body.rotation = angle + this.game.math.degToRad(90);
     this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject
     this.body.force.y = Math.sin(angle) * this.speed;
+	this.countAttractFailed = 0;
+}
 
+Villager.prototype.PrepareAttack = function()
+{
+
+    this.game.time.events.add(Phaser.Timer.SECOND * 2, this.attack, this);
+	this.loadTexture('spr_enemy_attack', 0);
+    this.animations.add('attack');
+    this.animations.play('attack', 8, true);
+	this.angle = 0;
+	this.villagerState = this.States.PREPARING;
+}
+
+Villager.prototype.attack = function()
+{
+	if(this.villagerState == this.States.PREPARING)
+	{
+		this.Shoot(this.game.saucer.x,this.game.saucer.y);
+	}
+	this.shootCD = 30;
 }
 
 Villager.prototype.PlayFallingAnimation = function()
 {
 	this.loadTexture('spr_enemy_falling', 0);
     this.animations.add('falling');
-    this.animations.play('falling', 8, true);
+    this.animations.play('falling', 10, true);
+	this.bIsMoving = false;
 }
 
 Villager.prototype.update = function() {
@@ -121,7 +144,7 @@ Villager.prototype.update = function() {
 				this.PlayFallingAnimation();
 			}
 			// this.body.angularRotation += Math.random();
-			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
+			else if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
 			{
 				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
 				this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject
@@ -129,8 +152,13 @@ Villager.prototype.update = function() {
 			}
 			else
 			{
-				this.attractedBy = "";
-				this.villagerState = this.States.IDLE;
+				this.countAttractFailed++;
+				if(this.countAttractFailed > 5)
+				{
+					this.attractedBy = "";
+					this.villagerState = this.States.IDLE;
+					this.countAttractFailed = 0;
+				}
 			}
 		}
 		else
@@ -138,11 +166,15 @@ Villager.prototype.update = function() {
 			this.attractedBy = "";
 			this.villagerState = this.States.IDLE;
 		}
+		return;
 	}
-
 	else
 	{
-		if(Math.abs(this.y-this.prevY) > 0.1)
+		if(this.villagerState == this.States.PREPARING)
+		{
+			return;
+		}
+		if(Math.abs(this.y-this.prevY) > 0.03)
 		{
 			if(this.villagerState != this.States.FALLING)
 			{
@@ -150,6 +182,7 @@ Villager.prototype.update = function() {
 				this.PlayFallingAnimation();
 			}
 			this.prevY = this.y;
+			return;
 		}
 		else
 		{
@@ -198,15 +231,15 @@ Villager.prototype.update = function() {
 	}
 	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{
-		if(Math.abs(this.game.saucer.x - this.x) < 300 && Math.abs(this.game.saucer.y - this.y) < 300 && this.timeLeft <= 0)
+		if(Math.abs(this.game.saucer.x - this.x) < 300 && Math.abs(this.game.saucer.y - this.y) < 300 && this.shootCD <= 0)
 		{
-			this.Shoot(this.game.saucer.x,this.game.saucer.y);
-			this.timeLeft = 30;
+			this.shootCD = 99999;
+			this.PrepareAttack();
 		}
 		else
 		{
 			this.Idle();
 		}
 	}
-
+	this.shootCD -= this.game.time.elapsed/100;
 };

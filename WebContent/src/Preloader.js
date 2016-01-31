@@ -58,7 +58,8 @@ BasicGame.Preloader.prototype = {
 		}
 
 		// parallax level 5
-		this.load.image( 'l5_tile_01', 'images/placeholders/l5_tile_01.png' );
+		// this.load.image( 'l5_tile_01', 'images/placeholders/l5_tile_01.png' );
+		this.load.image( 'l5_tile_01', 'images/decors/skybox_2k.png' );
 	},
 
 	create: function () {

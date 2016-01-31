@@ -62,7 +62,7 @@ BasicGame.Game.prototype = {
     this.context_layer = this.game.add.group();
 
     // parallax level 5: backgorund
-    var background = this.game.add.tileSprite(0, 0, 1024 * 1.5, 768, 'l5_tile_01');
+    var background = this.game.add.sprite(0, 0, 'l5_tile_01');
     this.parallax_level5.add( background );
     background.fixedToCamera = true;
 

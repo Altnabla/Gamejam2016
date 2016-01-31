@@ -19,7 +19,7 @@ BasicGame.MainMenu.prototype = {
 
 		this.add.sprite(0, 0, 'titlepage');
 
-		this.playButton = this.add.button(400, 600, 'playButton', this.startGame, this, 'buttonOver', 'buttonOut', 'buttonOver');
+		this.playButton = this.add.button((1024 - 356) / 2, 600, 'playButton', this.startGame, this, 'buttonOver', 'buttonOut', 'buttonOver');
 
 	},
 

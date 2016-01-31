@@ -15,7 +15,8 @@ BasicGame.Preloader.prototype = {
 		//	These are the assets we loaded in Boot.js
 		//	A nice sparkly background and a loading progress bar
 		this.background = this.add.sprite(0, 0, 'preloaderBackground');
-		this.preloadBar = this.add.sprite(300, 400, 'preloaderBar');
+		this.preloadBar = this.add.sprite(384, 331, 'preloaderBar');
+		// 384 / 331
 
 		//	This sets the preloadBar sprite as a loader sprite.
 		//	What that does is automatically crop the sprite from 0 to full-width
@@ -54,7 +55,7 @@ BasicGame.Preloader.prototype = {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );
 			if ( i == 3) {
 				this.load.image( 'l2_tile_0' + i + 'v2', 'images/placeholders/l2_tile_0' + i + 'v2.png' );
-				this.load.image( 'l2_tile_0' + i + 'v3', 'images/placeholders/l2_tile_0' + i + 'v3.png' );	
+				this.load.image( 'l2_tile_0' + i + 'v3', 'images/placeholders/l2_tile_0' + i + 'v3.png' );
 			}
 		}
 

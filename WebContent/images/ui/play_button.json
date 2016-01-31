@@ -2,19 +2,19 @@
   "frames": [
     {
       "filename": "buttonOut",
-      "frame": {"x":0,"y":0,"w":95,"h":94},
+      "frame": {"x":0,"y":0,"w":356,"h":132},
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": {"x":0,"y":0,"w":95,"h":94},
-      "sourceSize": {"w":95,"h":94}
+      "spriteSourceSize": {"x":0,"y":0,"w":356,"h":132},
+      "sourceSize": {"w":356,"h":132}
     },
     {
       "filename": "buttonOver",
-      "frame": {"x":96,"y":0,"w":95,"h":94},
+      "frame": {"x":357,"y":0,"w":356,"h":132},
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": {"x":96,"y":0,"w":95,"h":94},
-      "sourceSize": {"w":95,"h":94}
+      "spriteSourceSize": {"x":357,"y":0,"w":356,"h":132},
+      "sourceSize": {"w":356,"h":132}
     }
   ]
 }

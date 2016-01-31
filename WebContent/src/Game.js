@@ -141,11 +141,12 @@ BasicGame.Game.prototype = {
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
             instance = new Altar(this.game, x, this.game.world.height - y);
-            instance.y -= instance.height;
+            instance.y -= instance.height/2;
 			instance.y -= 32;
+			instance.x += instance.width/2;
             // altar_x = x + instance.width / 2;
-            // instance.x -= instance.width
-			      this.altar = instance;
+            // // instance.x -= instance.width
+			this.altar = instance;
             this.game.add.existing(instance);
             this.parallax_level2b.add( instance );
           }
@@ -153,11 +154,16 @@ BasicGame.Game.prototype = {
        }
      }
 
+	 
+	this.messiah = new Messiah(this.game,this.altar.x,this.altar.y);
+	this.game.add.existing(this.messiah)
+	this.messiah.init(this.messiah);
+	 
      // start saucer
-    this.saucer.body.x = altar_x;
+    this.saucer.body.x = this.altar.x;
     this.saucer.pushDown( this.saucer );
 
-
+	
     // camera
     this.game.camera.follow(this.saucer);
     this.game.camera.deadzone = new Phaser.Rectangle( 300, 100, 1024 - 600, 768 - 500);

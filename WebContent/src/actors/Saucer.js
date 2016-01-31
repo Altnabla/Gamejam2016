@@ -8,11 +8,16 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.emitter	 = "NULL";
 	this.gameinstance = gameinstance;
 	this.GameOverTimeLeft = 300;
-	this.TimeLeftText = game.add.text( 100, 700, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
 
 	this.life = 5;
 	this.maxLife = 5;
 	
+	this.TimeLeftText = game.add.text( 100, 25, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
+	this.TimeLeftText.x = game.width - 50 - this.TimeLeftText.width;
+
+	this.LifeLeftText = game.add.text( 100, 50, "life : " + this.life + "/" + this.maxLife, { font: "30px square", fill: "#FFFFFF" });
+	this.LifeLeftText.x = game.width - 50 - this.LifeLeftText.width;
+
 	this.init = function(self)
 	{
 		Saucer.prototype.init(self);
@@ -25,7 +30,8 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	    self.emitter.makeParticles('fx_ray');
 		self.emitter.setAlpha(1, 0, 2000);
 		self.emitter.setScale(0.0, 2, 1, 1, 2000);
-		self.TimeLeftText.fixedToCamera = true;
+		self.TimeLeftText.fixedToCamera = true;		
+		self.LifeLeftText.fixedToCamera = true;
 		    //  Create our Timer
 		var timer = self.game.time.create(false);
 
@@ -59,9 +65,9 @@ Saucer = function (game, x, y, texture, gameinstance) {
 			this.game.paused = true;
 		}
 	};
-	
+
 	this.decrTimeleft = function()
-	{	
+	{
 		if(!this.game.bHasEnded)
 		{
 			this.GameOverTimeLeft--;
@@ -82,8 +88,10 @@ Saucer = function (game, x, y, texture, gameinstance) {
 			else
 			{
 				this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
+				this.LifeLeftText.setText("life : " + this.life + "/" + this.maxLife);
+				
 				// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
-			}		
+			}
 		}
 	};
 	this.GameOver = function( ) {
@@ -93,7 +101,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		labelWinS.anchor.setTo(0.5, 0.5);
 		var labelWin = this.game.add.text( this.game.camera.x + window.innerWidth/2, 150, "You ran out of fuel !", { font: font2, fill: "#33FF33" });
 		labelWin.anchor.setTo(0.5, 0.5);
-		
+
 		var labelThanksS = this.game.add.text( this.game.camera.x + window.innerWidth/2 , 251, "Thanks for playing", { font: font1, fill: "#000" });
 		labelThanksS.anchor.setTo(0.5, 0.5);
 
@@ -105,7 +113,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 
 		var labelCredit = this.game.add.text( this.game.camera.x + window.innerWidth/2, 550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
 		labelCredit.anchor.setTo(0.5, 0.5);
-		
+
 		labelWinS.fixedToCamera = true;
 		labelWin.fixedToCamera = true;
 		labelThanksS.fixedToCamera = true;
@@ -115,7 +123,6 @@ Saucer = function (game, x, y, texture, gameinstance) {
 
 		// sound lost
 		this.gameinstance.soundManager.playSnd_defeat();
-		
 	};
 };
 

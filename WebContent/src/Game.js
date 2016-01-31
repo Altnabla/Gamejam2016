@@ -39,7 +39,7 @@ BasicGame.Game.prototype = {
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 100;
     this.physics.p2.setImpactEvents(true);
-
+	this.game.bHasEnded = false;
     var altarCollisionGroup = this.game.physics.p2.createCollisionGroup();
     var villagerCollisionGroup = this.game.physics.p2.createCollisionGroup();
 
@@ -207,12 +207,13 @@ BasicGame.Game.prototype = {
     }
 
 	this.villagers = keep;
-        // sound manager update
-        this.soundManager.update();
+	// sound manager update
+	this.soundManager.update();
 
-        if (this.villagers.length == 0){
-          tis.end();
-        }
+	if (this.villagers.length == 0 && !this.game.bHasEnded){
+	  this.end();
+	  this.game.bHasEnded = true;
+	}
 
 
 	},

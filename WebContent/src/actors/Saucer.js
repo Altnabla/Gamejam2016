@@ -50,29 +50,30 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	};
 	
 	this.decrTimeleft = function()
-	{
-		this.GameOverTimeLeft--;
-		console.log(this.GameOverTimeLeft);
-		var min = Math.floor(this.GameOverTimeLeft/60);
-		var sec = this.GameOverTimeLeft%60;
-		if(this.GameOverTimeLeft == -1)
+	{	
+		if(!this.game.bHasEnded)
 		{
-			this.game.paused = true;
-		}
-		else if(this.GameOverTimeLeft == 0)
-		{
-			// PERDU
-			this.TimeLeftText.setText("");
-			this.GameOver();
-			this.game.paused = true;
+			this.GameOverTimeLeft--;
+			var min = Math.floor(this.GameOverTimeLeft/60);
+			var sec = this.GameOverTimeLeft%60;
+			if(this.GameOverTimeLeft == -1)
+			{
+				this.game.paused = true;
+			}
+			else if(this.GameOverTimeLeft == 0)
+			{
+				// PERDU
+				this.TimeLeftText.setText("");
+				this.GameOver();
+				this.game.paused = true;
 
+			}
+			else
+			{
+				this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
+				// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
+			}		
 		}
-		else
-		{
-			this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
-			// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
-		}
-		
 	};
 	this.GameOver = function( ) {
 		var font1 = "45px square";

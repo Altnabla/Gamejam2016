@@ -68,6 +68,7 @@ SoundManager.prototype.StopIntro = function()
 
 SoundManager.prototype.StartMusic = function()
 {
+	this.StopIntro();
 	this.musicRaoool.loopFull();
 	this.musicFideles.loopFull();
 };
@@ -228,4 +229,28 @@ SoundManager.prototype.playSnd_defeat = function()
 };
 
 
-
+SoundManager.prototype.StopAllSounds = function()
+{
+	this.snd_fidele_angry_01.stop();
+	this.snd_fidele_aspire_01.stop();
+	this.snd_fidele_aspire_02.stop();
+	this.snd_fidele_aspire_03.stop();
+	this.snd_fidele_drop_autel.stop();
+	this.snd_fidele_shoot_01.stop();
+	this.snd_fidele_shoot_02.stop();
+	this.snd_fidele_splash_01.stop();
+	this.snd_fidele_splash_02.stop();
+	this.snd_raoool_gimick.stop();
+	this.snd_ritual_fidele_01.stop();
+	this.snd_ritual_fidele_02.stop();
+	this.snd_ritual_fidele_03.stop();
+	this.snd_ritual_raoool_01.stop();
+	this.snd_ritual_raoool_02.stop();
+	this.snd_ritual_raoool_03.stop();
+	this.snd_soucoupe_explode.stop();
+	this.snd_soucoupe_hit_01.stop();
+	this.snd_soucoupe_hit_02.stop();
+	this.snd_soucoupe_hit_03.stop();
+	this.snd_soucoupe_move.stop();
+	this.snd_soucoupe_rayon.stop();
+};

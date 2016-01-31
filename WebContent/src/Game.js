@@ -114,7 +114,6 @@ BasicGame.Game.prototype = {
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
            } else if ( element.name.match( re_spr_ennemy_big_01 ) || element.name.match( re_spr_ennemy_small_01 ) ) {
-             console.log( "x: " + x + ' -- y: ' +y);
              instance = new Villager(this.game,x,y,'spr_ennemy_small_01');
              this.game.add.existing(instance);
              instance.init(instance);
@@ -140,7 +139,7 @@ BasicGame.Game.prototype = {
           } else if ( element.name.match(re_spr_altar) ) {
             instance = new Altar(this.game, x, this.game.world.height - y);
             instance.y -= 2*instance.height/2;
-            instance.x -= instance.width/2;
+            // instance.x -= instance.width
 			      this.altar = instance;
             this.game.add.existing(instance);
             this.parallax_level2b.add( instance );

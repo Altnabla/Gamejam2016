@@ -30,6 +30,11 @@ Projectile.prototype.blockHit = function(body, bodyB, shapeA, shapeB, equation) 
     //  The first argument may be null or not have a sprite property, such as when you hit the world bounds.
     if (body)
     {
+			if (body.sprite) {
+				if (body.sprite.key == 'spaceship') {
+					body.sprite.hitten( body.sprite );
+				}
+			}
 		this.kill();
 	}
     else

@@ -102,6 +102,7 @@ Villager.prototype.PrepareAttack = function()
 	this.loadTexture('spr_enemy_attack', 0);
     this.animations.add('attack');
     this.animations.play('attack', 8, true);
+	this.angle = 0;
 	this.villagerState = this.States.PREPARING;
 }
 
@@ -173,7 +174,7 @@ Villager.prototype.update = function() {
 		{
 			return;
 		}
-		if(Math.abs(this.y-this.prevY) > 0)
+		if(Math.abs(this.y-this.prevY) > 0.03)
 		{
 			if(this.villagerState != this.States.FALLING)
 			{

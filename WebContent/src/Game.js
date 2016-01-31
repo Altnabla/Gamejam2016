@@ -154,19 +154,19 @@ BasicGame.Game.prototype = {
        }
      }
 
-	 
+
 	this.messiah = new Messiah(this.game,this.altar.x,this.altar.y,this);
 	this.game.add.existing(this.messiah)
     this.parallax_level2b.add( instance );
 	this.messiah.init(this.messiah);
-	 
+
      // start saucer
     this.saucer.body.x = this.altar.x;
     this.saucer.pushDown( this.saucer );
 
-	
+
     // camera
-	
+
     this.game.camera.follow(this.saucer);
 	this.game.camera.x=this.saucer.x+this.saucer.width/2;
     this.game.camera.deadzone = new Phaser.Rectangle( 300, 100, 1024 - 600, 768 - 500);
@@ -178,6 +178,7 @@ BasicGame.Game.prototype = {
 
 
     console.log( this.game);
+
 	},
 
 	update: function ( game ) {
@@ -188,10 +189,10 @@ BasicGame.Game.prototype = {
     this.parallax_level5.x = - this.game.camera.x * 0.1;
     this.parallax_level5.y = - this.game.camera.y * 0.2;
 
-	
+
 	var keep = [];
     for (var i = 0; i < this.villagers.length; ++i) {
-	  var villager = this.villagers[ i ];	
+	  var villager = this.villagers[ i ];
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
         villager.Zombify();
@@ -202,10 +203,13 @@ BasicGame.Game.prototype = {
 		keep.push(villager);
       }
     }
-	
+
 	this.villagers = keep;
         // sound manager update
         this.soundManager.update();
+
+        //this.end();
+
 
 	},
 
@@ -225,6 +229,30 @@ BasicGame.Game.prototype = {
         this.game.debug.spriteCoords(this.saucer, 32, 600);
 
     },
+
+  end: function( ) {
+    var font1 = "45px square";
+    var font2 = "54px square";
+    var labelWinS = this.game.add.text( this.altar.x + 1, 151, "World converted to your cult!", { font: font2, fill: "#000" });
+    labelWinS.anchor.setTo(0.5, 0.5);
+    var labelWin = this.game.add.text( this.altar.x, 150, "World converted to your cult!", { font: font2, fill: "#33FF33" });
+    labelWin.anchor.setTo(0.5, 0.5);
+
+
+    var labelThanksS = this.game.add.text( this.altar.x + 1, 251, "Thanks for playing", { font: font1, fill: "#000" });
+    labelThanksS.anchor.setTo(0.5, 0.5);
+
+    var labelThanks = this.game.add.text( this.altar.x, 250, "Thanks for playing", { font: font1, fill: "#33FF33" });
+    labelThanks.anchor.setTo(0.5, 0.5);
+
+    var labelCreditS = this.game.add.text( this.altar.x + 1, 551, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#000" });
+    labelCreditS.anchor.setTo(0.5, 0.5);
+
+
+    var labelCredit = this.game.add.text( this.altar.x, 550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
+    labelCredit.anchor.setTo(0.5, 0.5);
+
+  },
 
 	quitGame: function (pointer) {
 		//	Here you should destroy anything you no longer need.

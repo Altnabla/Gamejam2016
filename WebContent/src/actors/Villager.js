@@ -70,12 +70,16 @@ Villager.prototype.Idle = function()
 
 Villager.prototype.Shoot = function(x,y)
 {
-	var projectile = new Projectile(this.game,this.x,this.y-50,'bullet',this);
+	var projectile = new Projectile(this.game,this.x,this.y-50,'',this);
     this.game.add.existing(projectile);
 	projectile.init(projectile);
 	var pjspeed = 150;
 	projectile.body.force.x = (x-this.x) * pjspeed;    // accelerateToObject
 	projectile.body.force.y = (y-this.y) * pjspeed;
+	projectile.loadTexture('spr_bullet_01', 0);
+	projectile.angle = 0;
+	projectile.animations.add('projectile');
+	projectile.animations.play('projectile', 8, true);	
 
 }
 

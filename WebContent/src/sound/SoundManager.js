@@ -6,6 +6,8 @@ SoundManager = function (game, gameinstance) {
 	this.game = game;
 	this.gameinstance = gameinstance;
 
+	this.musicIntro  = this.game.add.audio('musicIntro');
+
 	this.musicRaoool  = this.game.add.audio('musicRaoool');
 	this.musicFideles  = this.game.add.audio('musicFideles');
 
@@ -51,6 +53,19 @@ SoundManager.prototype.constructor = SoundManager;
 
 
 
+
+SoundManager.prototype.StartIntro = function()
+{
+	this.musicIntro.loopFull();
+};
+
+SoundManager.prototype.StopIntro = function()
+{
+	this.musicIntro.stop();
+};
+
+
+
 SoundManager.prototype.StartMusic = function()
 {
 	this.musicRaoool.loopFull();
@@ -62,6 +77,9 @@ SoundManager.prototype.StopMusic = function()
 	this.musicRaoool.stop();
 	this.musicFideles.stop();
 };
+
+
+
 
 
 SoundManager.prototype.SetVolume = function(__value)

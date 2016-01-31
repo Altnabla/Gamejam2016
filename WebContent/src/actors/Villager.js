@@ -9,6 +9,7 @@ Villager = function (game, x, y, texture) {
 		IDLE : 0,
 		FALLING : 1,
 		PREPARING : 4,
+		PRAYING : 5,
 		ZOMBIE : 2,
 		ATTACKING : 3
 	}
@@ -16,6 +17,7 @@ Villager = function (game, x, y, texture) {
 
 	this.currentDestination = [0,0];
 	this.bIsMoving = false;
+	this.bMovesLeft = true;
 	this.timeLeft = 0;
 	this.shootCD = 0;
 	this.speed = 300;
@@ -39,15 +41,40 @@ Villager.prototype.moveTo = function(x,y,timelimit)
 	this.currentDestination = [x,y];
 	this.bIsMoving = true;
 	this.timeLeft = timelimit;
-	if(this.x < this.currentDestination[0])
+	if(this.x < this.currentDestination[0] && this.bMovesLeft)
 	{
 		this.scale.x *= -1;
+		this.bMovesLeft = false;
 	}
+	else if (this.x > this.currentDestination[0] && !this.bMovesLeft)
+	{
+		this.scale.x *= -1;
+		this.bMovesLeft = true;
+	}
+}
+Villager.prototype.Pray = function()
+{
+    this.game.time.events.add(Phaser.Timer.SECOND * 2.2, this.endPray, this);
+	this.loadTexture('spr_enemy_ritual', 0);
+    this.animations.add('ritual');
+    this.animations.play('ritual', 10, true);
+	this.angle = 0;
+	this.villagerState = this.States.PRAYING;	
+}
+Villager.prototype.endPray = function()
+{
+	this.villagerState = this.States.IDLE;
 }
 Villager.prototype.Idle = function()
 {
 	if(this.timeLeft <= 0)
 	{
+		if(Math.random() > 0.5)
+		{
+			this.Pray();
+			return;
+		}
+		
 		if(Math.random() > 0.5)
 		{
 			var randX = this.x + (-150 + Math.random()*300);
@@ -97,12 +124,12 @@ Villager.prototype.attract = function(saucerbeam) {
 
 Villager.prototype.PrepareAttack = function()
 {
-
     this.game.time.events.add(Phaser.Timer.SECOND * 2, this.attack, this);
 	this.loadTexture('spr_enemy_attack', 0);
     this.animations.add('attack');
     this.animations.play('attack', 8, true);
 	this.angle = 0;
+	this.body.rotation = 0;
 	this.villagerState = this.States.PREPARING;
 }
 
@@ -128,6 +155,8 @@ Villager.prototype.update = function() {
 	if(this.villagerState == this.States.ZOMBIE)
 	{
 		// Pray
+		this.angle = 0
+		this.body.rotation = 0;
 		return;
 	}
 	if(this.attractedBy != "")
@@ -170,8 +199,11 @@ Villager.prototype.update = function() {
 	}
 	else
 	{
-		if(this.villagerState == this.States.PREPARING)
+		if(this.villagerState == this.States.PREPARING || this.villagerState == this.States.PRAYING)
 		{
+			this.angle = 0;
+			this.body.rotation = 0;
+			this.bIsMoving = false;
 			return;
 		}
 		if(Math.abs(this.y-this.prevY) > 0.03)

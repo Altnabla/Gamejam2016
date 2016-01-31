@@ -8,6 +8,8 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.emitter	 = "NULL";
 	this.gameinstance = gameinstance;
 	this.GameOverTimeLeft = 300;
+	this.TimeLeftText = game.add.text( 100, 700, " 5 min 0 sec before running out of fuel", { font: "30px square", fill: "#FFFFFF" });
+	
 	this.init = function(self)
 	{
 		Saucer.prototype.init(self);
@@ -20,9 +22,16 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	    self.emitter.makeParticles('fx_ray');
 		self.emitter.setAlpha(1, 0, 2000);
 		self.emitter.setScale(0.0, 2, 1, 1, 2000);
-		self.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
+		self.TimeLeftText.fixedToCamera = true;
+		    //  Create our Timer
+		var timer = self.game.time.create(false);
 
+		//  Set a TimerEvent to occur after 2 seconds
+		timer.loop(1000, this.decrTimeleft, this);
 
+		//  Start the timer running - this is important!
+		//  It won't start automatically, allowing you to hook it to button events and the like.
+		timer.start();
 
 		// self.emitter.gravity = 600;
 
@@ -46,13 +55,56 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.decrTimeleft = function()
 	{
 		this.GameOverTimeLeft--;
-		var min = this.GameOverTimeLeft/60;
+		console.log(this.GameOverTimeLeft);
+		var min = Math.floor(this.GameOverTimeLeft/60);
 		var sec = this.GameOverTimeLeft%60;
-		if(this.GameOverTimeLeft == 0)
+		if(this.GameOverTimeLeft == -1)
+		{
+			this.game.paused = true;
+		}
+		else if(this.GameOverTimeLeft == 0)
 		{
 			// PERDU
+			this.TimeLeftText.setText("");
+			this.GameOver();
+			this.game.paused = true;
+
 		}
-	}
+		else
+		{
+			this.TimeLeftText.setText(min + " min "+ sec + " sec before running out of fuel");
+			// this.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
+		}
+		
+	};
+	this.GameOver = function( ) {
+		var font1 = "45px square";
+		var font2 = "54px square";
+		var labelWinS = this.game.add.text( this.game.camera.x + window.innerWidth/2, 151, "You ran out of fuel !", { font: font2, fill: "#000" });
+		labelWinS.anchor.setTo(0.5, 0.5);
+		var labelWin = this.game.add.text( this.game.camera.x + window.innerWidth/2, 150, "You ran out of fuel !", { font: font2, fill: "#33FF33" });
+		labelWin.anchor.setTo(0.5, 0.5);
+		
+		var labelThanksS = this.game.add.text( this.game.camera.x + window.innerWidth/2 , 251, "Thanks for playing", { font: font1, fill: "#000" });
+		labelThanksS.anchor.setTo(0.5, 0.5);
+
+		var labelThanks = this.game.add.text( this.game.camera.x + window.innerWidth/2, 250, "Thanks for playing", { font: font1, fill: "#33FF33" });
+		labelThanks.anchor.setTo(0.5, 0.5);
+
+		var labelCreditS = this.game.add.text( this.game.camera.x + window.innerWidth/2, 551, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#000" });
+		labelCreditS.anchor.setTo(0.5, 0.5);
+
+		var labelCredit = this.game.add.text( this.game.camera.x + window.innerWidth/2, 550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
+		labelCredit.anchor.setTo(0.5, 0.5);
+		
+		labelWinS.fixedToCamera = true;
+		labelWin.fixedToCamera = true;
+		labelThanksS.fixedToCamera = true;
+		labelThanks.fixedToCamera = true;
+		labelCreditS.fixedToCamera = true;
+		labelCredit.fixedToCamra = true;
+		
+	};
 };
 
 Saucer.prototype = Object.create(PhysicsActor.prototype);

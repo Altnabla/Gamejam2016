@@ -30,14 +30,6 @@ BasicGame.Game.prototype = {
 
 
 
-  preload:function(){
-        console.log("preloading assets");
-        // sounds
-        this.game.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
-        this.game.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
-
-  },
-
 
 
 	create: function () {
@@ -62,9 +54,16 @@ BasicGame.Game.prototype = {
     this.context_layer = this.game.add.group();
 
     // parallax level 5: backgorund
-    var background = this.game.add.tileSprite(0, 0, 1024 * 1.5, 768, 'l5_tile_01');
+    var background = this.game.add.sprite(0, 0, 'l5_tile_01');
     this.parallax_level5.add( background );
     background.fixedToCamera = true;
+
+    var holy_spawn = this.game.add.sprite(0, 0, 'holy_spawn');
+    this.parallax_level5.add( holy_spawn );
+    holy_spawn.fixedToCamera = true;
+
+    var tween = this.game.add.tween(holy_spawn);
+    tween.to({ alpha: 0 }, 5000, 'Linear', true, 0);
 
     // input
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -155,8 +154,9 @@ BasicGame.Game.prototype = {
      }
 
 	 
-	this.messiah = new Messiah(this.game,this.altar.x,this.altar.y);
+	this.messiah = new Messiah(this.game,this.altar.x,this.altar.y,this);
 	this.game.add.existing(this.messiah)
+    this.parallax_level2b.add( instance );
 	this.messiah.init(this.messiah);
 	 
      // start saucer
@@ -165,13 +165,16 @@ BasicGame.Game.prototype = {
 
 	
     // camera
+	
     this.game.camera.follow(this.saucer);
+	this.game.camera.x=this.saucer.x+this.saucer.width/2;
     this.game.camera.deadzone = new Phaser.Rectangle( 300, 100, 1024 - 600, 768 - 500);
 
     // Sound Manager
     this.soundManager = new SoundManager(this.game,this);
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
-    this.soundManager.Start();
+    this.soundManager.StartMusic();
+
 
     console.log( this.game);
 	},

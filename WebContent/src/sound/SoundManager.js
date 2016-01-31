@@ -6,6 +6,9 @@ SoundManager = function (game, gameinstance) {
 	this.game = game;
 	this.gameinstance = gameinstance;
 
+	this.musicRaoool  = this.game.add.audio('musicRaoool');
+	this.musicFideles  = this.game.add.audio('musicFideles');
+
 	
 	this.init = function(self)
 	{
@@ -39,26 +42,6 @@ SoundManager.prototype.update = function()
 };
 
 
-SoundManager.prototype.Start = function(){
-	
-	
-	console.log("Init SoundManager");
-
-	this.musicRaoool  = this.game.add.audio('musicRaoool');
-	this.musicFideles  = this.game.add.audio('musicFideles');
-
-	this.sounds = [this.musicRaoool, this.musicFideles];
 
 
-	this.game.sound.setDecodedCallback(this.sounds, this._soundsLoaded, this);
-}
-
-
-SoundManager.prototype._soundsLoaded = function() {
-
-	console.log("sound manager start");
-
-	this.StartMusic();
-
-}
 

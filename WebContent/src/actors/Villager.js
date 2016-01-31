@@ -69,8 +69,8 @@ Villager.prototype.Idle = function()
 
 Villager.prototype.Shoot = function(x,y)
 {
-   var projectile = new Projectile(this.game,100,100,'bullet',this);
-   var pjspeed = 1000;
+	var projectile = new Projectile(this.game,100,100,'bullet',this);
+	var pjspeed = 1000;
 	projectile.body.force.x = (x-this.x) * pjspeed;    // accelerateToObject
 	projectile.body.force.y = (y-this.y) * pjspeed;
 
@@ -149,6 +149,7 @@ Villager.prototype.update = function() {
 	
 	if(this.villagerState == this.States.IDLE && this.bIsMoving == false)
 	{
+		console.log(this.game.saucer);
 		if(Math.abs(this.game.saucer.x - this.x) < 750 && Math.abs(this.game.saucer.y - this.y) < 750 && this.timeleft <= 0)
 		{
 			this.Shoot(this.game.saucer.x,this.game.saucer.y);

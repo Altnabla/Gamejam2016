@@ -1,0 +1,9 @@
+@font-face {
+    font-family: square;
+    src: url('FORCED SQUARE.ttf');
+}
+
+.fontPreload{
+    position:absolute;
+    left:-100px;
+}

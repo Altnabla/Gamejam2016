@@ -151,9 +151,9 @@ BasicGame.Game.prototype = {
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
             l = new Altar(this.game, x, this.game.world.height - y);
-            l.y -= 2*l.height/3;
+            l.y -= 2*l.height/2;
             l.x -= l.width/2;
-			this.altar = l;
+			      this.altar = l;
             this.game.add.existing(l);
             this.parallax_level2b.add( l );
           }
@@ -186,7 +186,7 @@ BasicGame.Game.prototype = {
 
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
-		var villager = this.villagers[ i ];	
+		var villager = this.villagers[ i ];
         villager.alpha = 0.3;
 		villager.villagerState = villager.States.ZOMBIE;
         // console.log( 'Drag the sprites. Overlapping: true' );

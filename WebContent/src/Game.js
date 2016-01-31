@@ -42,6 +42,7 @@ BasicGame.Game.prototype = {
 
 	create: function () {
     this.game.world.setBounds(0, 0, 1024 * 4, 1152);
+    this.game.stage.backgroundColor = "#43c2ca";
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 100;
     this.physics.p2.setImpactEvents(true);
@@ -61,7 +62,7 @@ BasicGame.Game.prototype = {
     this.context_layer = this.game.add.group();
 
     // parallax level 5: backgorund
-    var background = this.game.add.tileSprite(0, 0, 1024, 768, 'l5_tile_01');
+    var background = this.game.add.tileSprite(0, 0, 1024 * 1.5, 768, 'l5_tile_01');
     this.parallax_level5.add( background );
     background.fixedToCamera = true;
 
@@ -175,6 +176,9 @@ BasicGame.Game.prototype = {
     this.parallax_level3.x = - this.game.camera.x * 0.6;
     this.parallax_level3.y = - this.game.camera.y * 0.6;
 
+    this.parallax_level5.x = - this.game.camera.x * 0.1;
+    this.parallax_level5.y = - this.game.camera.y * 0.2;
+
     for (var i = 0; i < this.villagers.length; ++i) {
 
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
@@ -182,12 +186,11 @@ BasicGame.Game.prototype = {
 		var villager = this.villagers[ i ];	
         villager.alpha = 0.3;
 		villager.villagerState = villager.States.ZOMBIE;
-
         // console.log( 'Drag the sprites. Overlapping: true' );
       }
       else
       {
-        //console.log( 'Drag the sprites. Overlapping: false' );
+
       }
     }
         // sound manager update

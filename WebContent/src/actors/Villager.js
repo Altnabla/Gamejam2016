@@ -72,7 +72,7 @@ Villager.prototype.Shoot = function(x,y)
 	var projectile = new Projectile(this.game,this.x,this.y-50,'bullet',this);
     this.game.add.existing(projectile);
 	projectile.init(projectile);
-	var pjspeed = 75;
+	var pjspeed = 150;
 	projectile.body.force.x = (x-this.x) * pjspeed;    // accelerateToObject
 	projectile.body.force.y = (y-this.y) * pjspeed;
 
@@ -136,7 +136,7 @@ Villager.prototype.update = function() {
 
 	else
 	{
-		if(Math.abs(this.y-this.prevY) > 0)
+		if(Math.abs(this.y-this.prevY) > 0.1)
 		{
 			if(this.villagerState != this.States.FALLING)
 			{

@@ -219,12 +219,14 @@ SoundManager.prototype.stopSnd_soucoupe_rayon = function()
 SoundManager.prototype.playSnd_victory = function()
 {
 	this.StopMusic();
+	this.StopAllSounds();
 	this.snd_game_victory.play();
 };
 
 SoundManager.prototype.playSnd_defeat = function()
 {
 	this.StopMusic();
+	this.StopAllSounds();
 	this.snd_game_defeat.play();
 };
 

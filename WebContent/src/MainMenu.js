@@ -14,8 +14,8 @@ BasicGame.MainMenu.prototype = {
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
 
-		// this.music = this.add.audio('titleMusic');
-		// this.music.play( '', 0, 1, true, true );
+		this.music = this.add.audio('musicIntro');
+		this.music.loopFull();
 
 		this.add.sprite(0, 0, 'titlepage');
 
@@ -30,6 +30,8 @@ BasicGame.MainMenu.prototype = {
 	},
 
 	startGame: function (pointer) {
+
+		this.music.stop();
 
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
 		// this.music.stop();

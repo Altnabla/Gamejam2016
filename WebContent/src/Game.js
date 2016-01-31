@@ -176,8 +176,7 @@ BasicGame.Game.prototype = {
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
     this.soundManager.StartMusic();
 
-    this.game.soundManager = this.soundManager;
-
+    this.soundManager = this.soundManager;
 
     console.log( this.game);
 
@@ -256,6 +255,9 @@ BasicGame.Game.prototype = {
 
     var labelCredit = this.game.add.text( this.altar.x, 550, "©RaoOol Team / GamJam 2016 - Paris", { font: font1, fill: "#33FF33" });
     labelCredit.anchor.setTo(0.5, 0.5);
+
+    // sound win
+    this.soundManager.playSnd_victory();
 
   },
 

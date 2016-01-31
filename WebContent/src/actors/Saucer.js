@@ -101,6 +101,9 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		labelThanks.fixedToCamera = true;
 		labelCreditS.fixedToCamera = true;
 		labelCredit.fixedToCamra = true;
+
+		// sound lost
+		this.soundManager.playSnd_defeat();
 		
 	};
 };

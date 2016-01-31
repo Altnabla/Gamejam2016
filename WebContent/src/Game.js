@@ -107,11 +107,20 @@ BasicGame.Game.prototype = {
          var instance;
          if ( element.name ) {
            if ( element.name.match( re_l3_tile_02 ) ) {
-             new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
+
+               new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
+
            } else if ( element.name.match( re_l3_tile_01 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_01', this.parallax_level3, true);
            } else if ( element.name.match( re_l2_tile_03 ) ) {
-             new ParallaxLevelX( this.game, x, y, 'l2_tile_03', this.parallax_level2);
+             var r = Math.random() * 3;
+             if ( r > 2) {
+               new ParallaxLevelX( this.game, x, y, 'l2_tile_03v3', this.parallax_level2);
+             } else if ( r > 1){
+                 new ParallaxLevelX( this.game, x, y, 'l2_tile_03v2', this.parallax_level2);
+             } else {
+               new ParallaxLevelX( this.game, x, y, 'l2_tile_03', this.parallax_level2);
+             }
            } else if ( element.name.match( re_l2_tile_01 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_01', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_02 ) ) {

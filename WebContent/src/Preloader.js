@@ -48,10 +48,14 @@ BasicGame.Preloader.prototype = {
 		this.load.spritesheet('spr_enemy_ritual','images/placeholders/spr_enemy_ritual.png',128,128,20);
 		this.load.spritesheet('spr_believer_ritual','images/placeholders/spr_believer_ritual.png',128,128,20);
 		this.load.spritesheet('spr_messiah_ritual','images/placeholders/spr_messiah_ritual.png',128,256,18);
-		
+
 		// parallax level 2
 		for ( var i = 1; i < 4; ++i ) {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );
+			if ( i == 3) {
+				this.load.image( 'l2_tile_0' + i + 'v2', 'images/placeholders/l2_tile_0' + i + 'v2.png' );
+				this.load.image( 'l2_tile_0' + i + 'v3', 'images/placeholders/l2_tile_0' + i + 'v3.png' );	
+			}
 		}
 
 		// parallax level 3
@@ -97,13 +101,13 @@ BasicGame.Preloader.prototype = {
 
 		this.load.audio('snd_game_victory', 'audio/sfx/game_victory.mp3');
 		this.load.audio('snd_game_defeat', 'audio/sfx/game_defeat.mp3');
-        
 
 
 
-        this.soundsToDecode = ['musicIntro', 'musicRaoool', 'musicFideles', 'snd_fidele_angry_01', 'snd_fidele_aspire_01', 'snd_fidele_aspire_02', 'snd_fidele_aspire_03', 'snd_fidele_drop_autel', 
+
+        this.soundsToDecode = ['musicIntro', 'musicRaoool', 'musicFideles', 'snd_fidele_angry_01', 'snd_fidele_aspire_01', 'snd_fidele_aspire_02', 'snd_fidele_aspire_03', 'snd_fidele_drop_autel',
         	'snd_fidele_shoot_01', 'snd_fidele_shoot_02', 'snd_fidele_splash_01', 'snd_fidele_splash_02', 'snd_raoool_gimick',
-        	'snd_ritual_fidele_01', 'snd_ritual_fidele_02', 'snd_ritual_fidele_03', 'snd_ritual_raoool_01', 'snd_ritual_raoool_02', 'snd_ritual_raoool_03', 'snd_soucoupe_explode',  
+        	'snd_ritual_fidele_01', 'snd_ritual_fidele_02', 'snd_ritual_fidele_03', 'snd_ritual_raoool_01', 'snd_ritual_raoool_02', 'snd_ritual_raoool_03', 'snd_soucoupe_explode',
         	'snd_soucoupe_hit_01', 'snd_soucoupe_hit_02', 'snd_soucoupe_hit_03', 'snd_soucoupe_move', 'snd_soucoupe_rayon'
         	,'snd_game_victory', 'snd_game_defeat'
 		];

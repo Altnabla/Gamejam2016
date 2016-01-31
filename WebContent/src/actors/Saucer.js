@@ -7,6 +7,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	this.currentAttractPointY = 0;
 	this.emitter	 = "NULL";
 	this.gameinstance = gameinstance;
+	this.GameOverTimeLeft = 300;
 	this.init = function(self)
 	{
 		Saucer.prototype.init(self);
@@ -19,6 +20,7 @@ Saucer = function (game, x, y, texture, gameinstance) {
 	    self.emitter.makeParticles('fx_ray');
 		self.emitter.setAlpha(1, 0, 2000);
 		self.emitter.setScale(0.0, 2, 1, 1, 2000);
+		self.game.time.events.add(Phaser.Timer.SECOND * 1, self.decrTimeleft, self);
 
 
 
@@ -40,6 +42,17 @@ Saucer = function (game, x, y, texture, gameinstance) {
 		var tween = this.game.add.tween(self);
 		tween.from({ alpha: 0.5 }, 100, Phaser.Easing.Bounce.InOut, true, 0);
 	};
+	
+	this.decrTimeleft = function()
+	{
+		this.GameOverTimeLeft--;
+		var min = this.GameOverTimeLeft/60;
+		var sec = this.GameOverTimeLeft%60;
+		if(this.GameOverTimeLeft == 0)
+		{
+			// PERDU
+		}
+	}
 };
 
 Saucer.prototype = Object.create(PhysicsActor.prototype);

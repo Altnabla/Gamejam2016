@@ -26,6 +26,7 @@ BasicGame.Game.prototype = {
 
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
+
   },
 
 

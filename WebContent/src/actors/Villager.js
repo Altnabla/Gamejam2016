@@ -24,6 +24,7 @@ Villager = function (game, x, y, texture) {
 		self.body.angularAcceleration = 0;
 		self.body.drag = 30;
 		self.anchor.setTo(0.5, 0.5);
+		self.y -= self.height * 3;
 	}
 
 };
@@ -123,7 +124,7 @@ Villager.prototype.update = function() {
 			}
 			else
 			{
-				this.attractedBy = "";	
+				this.attractedBy = "";
 				this.villagerState = this.States.IDLE;
 			}
 		}
@@ -148,10 +149,10 @@ Villager.prototype.update = function() {
 		else
 		{
 			this.villagerState = this.States.IDLE;
-		}	
+		}
 	}
 
-	
+
 	// Update Movement
 	if(this.bIsMoving)
 	{
@@ -200,7 +201,7 @@ Villager.prototype.update = function() {
 		else
 		{
 			this.Idle();
-		}		
+		}
 	}
 
 };

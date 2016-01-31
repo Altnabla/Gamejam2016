@@ -101,7 +101,7 @@ BasicGame.Game.prototype = {
          var element = layer.timeline[ j ];
          var x = element.key[0].object.x ? element.key[0].object.x : 0;
          var y = element.key[0].object.y ? element.key[0].object.y : 0;
-         var l;
+         var instance;
          if ( element.name ) {
            if ( element.name.match( re_l3_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l3_tile_02', this.parallax_level3, true);
@@ -113,25 +113,12 @@ BasicGame.Game.prototype = {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_01', this.parallax_level2);
            } else if ( element.name.match( re_l2_tile_02 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2_tile_02', this.parallax_level2);
-           } else if ( element.name.match( re_spr_ennemy_big_01 ) ) {
-            l = new Villager(this.game,x,y,'spr_ennemy_small_01');
-            l.y -= l.height * 3;
-         	 	this.game.add.existing(l);
-         	 	l.init(l);
-         		this.villagers.push( l );
-            this.parallax_level2c.add( l );
-
-        		// l.body.setCollisionGroup( villagerCollisionGroup );
-            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
-           } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
-            l = new Villager(this.game,x,y,'spr_ennemy_small_01');
-            l.y -= l.height * 3;
-         	 	this.game.add.existing(l);
-         	 	l.init(l);
-         		this.villagers.push( l );
-            this.parallax_level2c.add( l );
-            // l.body.setCollisionGroup( villagerCollisionGroup );
-            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
+           } else if ( element.name.match( re_spr_ennemy_big_01 ) || element.name.match( re_spr_ennemy_small_01 ) ) {
+            instance = new Villager(this.game,x,y,'spr_ennemy_small_01');
+         	 	this.game.add.existing(instance);
+         	 	instance.init(instance);
+         		this.villagers.push( instance );
+            this.parallax_level2c.add( instance );
           } else if ( element.name.match( re_box ) ) {
             var box = collideBoxes[ element.name ];
             var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
@@ -150,12 +137,12 @@ BasicGame.Game.prototype = {
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
-            l = new Altar(this.game, x, this.game.world.height - y);
-            l.y -= 2*l.height/2;
-            l.x -= l.width/2;
-			      this.altar = l;
-            this.game.add.existing(l);
-            this.parallax_level2b.add( l );
+            instance = new Altar(this.game, x, this.game.world.height - y);
+            instance.y -= 2*instance.height/2;
+            instance.x -= instance.width/2;
+			      this.altar = instance;
+            this.game.add.existing(instance);
+            this.parallax_level2b.add( instance );
           }
          }
        }

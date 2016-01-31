@@ -70,6 +70,9 @@ BasicGame.Game.prototype = {
     this.parallax_level5.add( holy_spawn );
     holy_spawn.fixedToCamera = true;
 
+    var tween = this.game.add.tween(holy_spawn);
+    tween.to({ alpha: 0 }, 5000, 'Linear', true, 0);
+
     // input
     this.cursors = this.game.input.keyboard.createCursorKeys();
 

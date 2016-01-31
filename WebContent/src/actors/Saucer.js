@@ -131,17 +131,27 @@ Saucer.prototype.update = function() {
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP))
 	{
 		this.body.thrust(600);
+		// snd
+		this.gameinstance.soundManager.playSnd_soucoupe_move();
 	} else if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
 	  this.body.thrust( -600 );
+	  // snd
+		this.gameinstance.soundManager.playSnd_soucoupe_move();
 	} else {
 		this.body.thrust(100);
+		// snd
+		this.gameinstance.soundManager.stopSnd_soucoupe_move();
 	}
 	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
 	{
 		this.ToggleTractorBeam(true);
+		// snd
+		this.gameinstance.soundManager.playSnd_soucoupe_rayon();
 	}
 	else
 	{
 		this.ToggleTractorBeam(false);
+		// snd
+		this.gameinstance.soundManager.stopSnd_soucoupe_rayon();
 	}
 };

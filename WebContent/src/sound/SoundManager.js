@@ -155,6 +155,8 @@ SoundManager.prototype.playSnd_soucoupe_hit = function()
 
 SoundManager.prototype.playSnd_soucoupe_move = function()
 {
+	if(this.snd_soucoupe_move.isPlaying)
+		return;
 	this.snd_soucoupe_move.loopFull();
 };
 SoundManager.prototype.stopSnd_soucoupe_move = function()
@@ -165,6 +167,8 @@ SoundManager.prototype.stopSnd_soucoupe_move = function()
 
 SoundManager.prototype.playSnd_soucoupe_rayon = function()
 {
+	if(this.snd_soucoupe_rayon.isPlaying)
+		return;
 	this.snd_soucoupe_rayon.loopFull();
 };
 SoundManager.prototype.stopSnd_soucoupe_rayon = function()

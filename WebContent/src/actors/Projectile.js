@@ -6,7 +6,7 @@ Projectile = function (game, x, y, texture) {
 	{
 		Projectile.prototype.init(self);		
 		//  Check for the block hitting another object
-		self.body.onBeginContact.add(self.blockHit, self);
+		self.body.onBeginContact.add(self.blockHit, self);	
 	}
 };
 

@@ -39,7 +39,7 @@ BasicGame.Preloader.prototype = {
 
 		this.load.json('map', 'images/placeholders/map_01.scon');
 		// this.load.spritesheet('grey-asteroid-rotation', 'images/animations/asteroid.png', 64, 64, 16);
-		this.load.image('bullet','images/placeholders/spr_bullet_01.png');
+		this.load.spritesheet('spr_bullet_01','images/placeholders/spr_bullet_01.png',64,64,4);
 		this.load.image('fx_ray','images/placeholders/fx_ray.png');
 		this.load.spritesheet('spr_enemy_idle', 'images/placeholders/spr_enemy_idle.png', 128, 128, 16);
 		this.load.spritesheet('spr_enemy_falling', 'images/placeholders/spr_enemy_falling.png', 128, 128, 4);

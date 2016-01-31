@@ -151,7 +151,7 @@ BasicGame.Game.prototype = {
 
     // camera
     this.game.camera.follow(this.saucer);
-    this.game.camera.deadzone = new Phaser.Rectangle( 200, 100, 1024 - 400, 768 - 350);
+    this.game.camera.deadzone = new Phaser.Rectangle( 300, 100, 1024 - 600, 768 - 500);
 
     // Sound Manager
     this.soundManager = new SoundManager(this.game,this);

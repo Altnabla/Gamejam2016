@@ -54,17 +54,19 @@ BasicGame.Preloader.prototype = {
 			this.load.image( 'l2_tile_0' + i, 'images/placeholders/l2_tile_0' + i + '.png' );
 		}
 
-		this.load.image( 'poteau_base_altar', 'images/decors/2a/poteau_base_altar.png' );
-		this.load.image( 'poteau_base_neutre', 'images/decors/2a/poteau_base_neutre.png' );
-		this.load.image( 'terrace_base_altar', 'images/decors/2a/terrace_base_altar.png' );
-		this.load.image( 'terrace_base_neutre', 'images/decors/2a/terrace_base_neutre.png' );
+		this.load.image( 'l2a_altar_poll', 'images/decors/2a/l2a_altar_poll.png' );
+		this.load.image( 'l2a_altar', 'images/decors/2a/l2a_altar.png' );
+		this.load.image( 'l2a_bridge_poll', 'images/decors/2a/l2a_bridge_poll.png' );
+		this.load.image( 'l2a_bridge', 'images/decors/2a/l2a_bridge.png' );
 
-		for (var i = 1; i < 6; ++i) {
-			this.load.image( 'tile_hill' + i, 'images/decors/2a/tile_hill_' + i + '.png' );
+		for (var i = 1; i < 7; ++i) {
+			if ( i != 2) {
+				this.load.image( 'tile_hill' + i, 'images/decors/2a/l2a_tile_0' + i + '.png' );
+			}
 		}
 
 		for (var i = 1; i < 6; ++i) {
-			this.load.image( 'tile_hill' + i, 'images/decors/2b/tile_hill_' + i + 'b.png' );
+			this.load.image( 'tile_hill' + i, 'images/decors/2b/l2b_tile_0' + i + '.png' );
 		}
 
 		// parallax level 3

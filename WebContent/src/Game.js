@@ -30,14 +30,6 @@ BasicGame.Game.prototype = {
 
 
 
-  preload:function(){
-        console.log("preloading assets");
-        // sounds
-        this.game.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
-        this.game.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
-
-  },
-
 
 
 	create: function () {
@@ -148,8 +140,9 @@ BasicGame.Game.prototype = {
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
           } else if ( element.name.match(re_spr_altar) ) {
             instance = new Altar(this.game, x, this.game.world.height - y);
-            instance.y -= 2*instance.height/2;
-            altar_x = x + instance.width / 2;
+            instance.y -= instance.height;
+			instance.y -= 32;
+            // altar_x = x + instance.width / 2;
             // instance.x -= instance.width
 			      this.altar = instance;
             this.game.add.existing(instance);
@@ -171,7 +164,8 @@ BasicGame.Game.prototype = {
     // Sound Manager
     this.soundManager = new SoundManager(this.game,this);
     this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
-    this.soundManager.Start();
+    this.soundManager.StartMusic();
+
 
     console.log( this.game);
 	},
@@ -189,8 +183,7 @@ BasicGame.Game.prototype = {
       if (this.checkOverlap(this.altar, this.villagers[ i ]))
       {
 		var villager = this.villagers[ i ];
-        villager.alpha = 0.3;
-		villager.villagerState = villager.States.ZOMBIE;
+        villager.Zombify();
         // console.log( 'Drag the sprites. Overlapping: true' );
       }
       else

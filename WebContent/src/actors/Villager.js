@@ -1,6 +1,7 @@
 //  Here is a custom game object
 Villager = function (game, x, y, texture) {
 	PhysicsActor.call(this,game,x,y,texture);
+	this.countDelta = 0;
 	this.prevX = 0;
 	this.prevY = 0;
 	this.NoMovementCount = 0;
@@ -150,8 +151,19 @@ Villager.prototype.PlayFallingAnimation = function()
 	this.bIsMoving = false;
 }
 
-Villager.prototype.update = function() {
+Villager.prototype.Zombify = function()
+{
+	if(this.villagerState != this.States.ZOMBIE)
+	{
+		this.villagerState = this.States.ZOMBIE;
+		this.loadTexture('spr_believer_ritual', 0);
+		this.animations.add('zombie');
+		this.animations.play('zombie', 10, true);
+	}
+}
 
+Villager.prototype.update = function() {
+	this.countDelta += this.game.time.elapsed;
 	if(this.villagerState == this.States.ZOMBIE)
 	{
 		// Pray
@@ -206,19 +218,28 @@ Villager.prototype.update = function() {
 			this.bIsMoving = false;
 			return;
 		}
-		if(Math.abs(this.y-this.prevY) > 0.03)
+		if(Math.abs(this.y-this.prevY) > 0.01)
 		{
 			if(this.villagerState != this.States.FALLING)
 			{
 				this.villagerState = this.States.FALLING;
 				this.PlayFallingAnimation();
 			}
-			this.prevY = this.y;
+			
+			if(this.countDelta > 100)
+			{
+				this.prevY = this.y;
+				this.countDelta = 0
+			}
 			return;
 		}
 		else
 		{
-			this.villagerState = this.States.IDLE;
+			if(this.countDelta > 100)
+			{
+				this.villagerState = this.States.IDLE;
+				this.countDelta = 0;
+			}
 		}
 	}
 

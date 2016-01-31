@@ -33,7 +33,7 @@ BasicGame.Game.prototype = {
 
 
 	create: function () {
-    this.game.world.setBounds(0, 0, 1024 * 6, 1152);
+    this.game.world.setBounds(0, 0, 1024 * 5, 1152);
     this.game.stage.backgroundColor = "#43c2ca";
     this.physics.startSystem(Phaser.Physics.P2JS);
   	this.physics.p2.gravity.y = 100;
@@ -133,13 +133,13 @@ BasicGame.Game.prototype = {
            }else if ( element.name.match( re_l2a_tile_05 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2a_tile_05', this.parallax_level2);
            }else if ( element.name.match( re_l2a_tile_06 ) ) {
-             new ParallaxLevelX( this.game, x, y, 're_l2a_tile_06', this.parallax_level2);
+             new ParallaxLevelX( this.game, x, y, 'l2a_tile_06', this.parallax_level2);
            }else if ( element.name.match( re_l2a_altar_poll ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2a_altar_poll', this.parallax_level2);
            }else if ( element.name.match( re_l2a_bridge_poll ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2a_bridge_poll', this.parallax_level2);
            }else if ( element.name.match( re_l2a_bridge ) ) {
-             new ParallaxLevelX( this.game, x, y, 're_l2a_bridge', this.parallax_level2);
+             new ParallaxLevelX( this.game, x, y, 'l2a_bridge', this.parallax_level2);
 
 
            }else if ( element.name.match( re_l2b_tile_01 ) ) {
@@ -151,7 +151,7 @@ BasicGame.Game.prototype = {
            }else if ( element.name.match( re_l2b_tile_04 ) ) {
              new ParallaxLevelX( this.game, x, y, 'l2b_tile_04', this.parallax_level2b);
            }else if ( element.name.match( re_l2b_tile_05 ) ) {
-             new ParallaxLevelX( this.game, x, y, 're_l2b_tile_05', this.parallax_level2b);
+             new ParallaxLevelX( this.game, x, y, 'l2b_tile_05', this.parallax_level2b);
 
 
            } else if ( element.name.match( re_l2_tile_03 ) ) {
@@ -183,7 +183,7 @@ BasicGame.Game.prototype = {
             }
 
             var collide_box = new CollideBox(this.game, rx +w/2, ry +h/2, w, h);
-          } else if ( element.name.match(re_l2a_altar) ) {
+          } else if ( element.name.match(re_l2a_altar) || element.name.match(re_spr_altar)) {
             instance = new Altar(this.game, x, this.game.world.height - y);
             instance.y -= instance.height/2;
 			instance.y -= 32;

@@ -61,12 +61,12 @@ BasicGame.Preloader.prototype = {
 
 		for (var i = 1; i < 7; ++i) {
 			if ( i != 2) {
-				this.load.image( 'tile_hill' + i, 'images/decors/2a/l2a_tile_0' + i + '.png' );
+				this.load.image( 'l2a_tile_0' + i, 'images/decors/2a/l2a_tile_0' + i + '.png' );
 			}
 		}
 
 		for (var i = 1; i < 6; ++i) {
-			this.load.image( 'tile_hill' + i, 'images/decors/2b/l2b_tile_0' + i + '.png' );
+			this.load.image( 'l2b_tile_0' + i, 'images/decors/2b/l2b_tile_0' + i + '.png' );
 		}
 
 		// parallax level 3

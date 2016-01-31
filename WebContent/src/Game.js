@@ -20,10 +20,6 @@ BasicGame.Game = function (game) {
 	this.villagers = []; // Array of villagers
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
-
-    this.starSpawnTimer = 0;
-    this.starSpawnFrequency = 10; // in ms
-    this.stars = [];
 };
 
 BasicGame.Game.prototype = {
@@ -31,6 +27,18 @@ BasicGame.Game.prototype = {
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
   },
+
+
+
+  preload:function(){
+        console.log("preloading assets");
+        // sounds
+        this.game.load.audio('musicRaoool', 'audio/RaooolBase_01.mp3');
+        this.game.load.audio('musicFideles', 'audio/FidelesBase_01.mp3');
+
+  },
+
+
 
 	create: function () {
     this.game.world.setBounds(0, 0, 1024 * 4, 1152);
@@ -47,6 +55,8 @@ BasicGame.Game.prototype = {
     this.parallax_level4 = this.game.add.group();
     this.parallax_level3 = this.game.add.group();
     this.parallax_level2 = this.game.add.group();
+    this.parallax_level2b = this.game.add.group();
+    this.parallax_level2c = this.game.add.group();
     this.parallax_level1 = this.game.add.group();
     this.context_layer = this.game.add.group();
 
@@ -62,8 +72,8 @@ BasicGame.Game.prototype = {
     this.saucer = new Saucer(this.game,100,100,'spaceship',this);
     this.game.add.existing(this.saucer);
     this.saucer.init(this.saucer);
+
 	this.game.saucer = this.saucer;
-	
     var re_l2_tile_01 = /l2_tile_01.*/;
     var re_l2_tile_02 = /l2_tile_02.*/;
     var re_spr_altar = /spr_altar.*/;
@@ -105,14 +115,19 @@ BasicGame.Game.prototype = {
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+            this.parallax_level2c.add( l );
 
-        		l.body.setCollisionGroup( villagerCollisionGroup );
+        		// l.body.setCollisionGroup( villagerCollisionGroup );
+            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
            } else if ( element.name.match( re_spr_ennemy_small_01 ) ) {
             l = new Villager(this.game,x,y,'spr_ennemy_small_01');
             l.y -= l.height * 3;
          	 	this.game.add.existing(l);
          	 	l.init(l);
          		this.villagers.push( l );
+            this.parallax_level2c.add( l );
+            // l.body.setCollisionGroup( villagerCollisionGroup );
+            // l.body.collides([villagerCollisionGroup, altarCollisionGroup]);
           } else if ( element.name.match( re_box ) ) {
             var box = collideBoxes[ element.name ];
             var scale_x = element.key[0].object.scale_x ? element.key[0].object.scale_x : 1;
@@ -133,10 +148,9 @@ BasicGame.Game.prototype = {
           } else if ( element.name.match(re_spr_altar) ) {
             l = new Altar(this.game, x, this.game.world.height - y);
             // l.y -= l.height;
+            this.altar = l;
             this.game.add.existing(l);
-            this.parallax_level2.add( l );
-            l.body.setCollisionGroup(altarCollisionGroup);
-            l.body.collides( villagerCollisionGroup, l.hitAltar, l);
+            this.parallax_level2b.add( l );
           }
          }
        }
@@ -147,6 +161,11 @@ BasicGame.Game.prototype = {
     this.game.camera.follow(this.saucer);
     this.game.camera.deadzone = new Phaser.Rectangle( 200, 100, 1024 - 400, 768 - 350);
 
+    // Sound Manager
+    this.soundManager = new SoundManager(this.game,this);
+    this.soundManager.SetVolume(1); // SI le son vous gonfle, c'est ici que ça se passe ;)
+    this.soundManager.Start();
+
     console.log( this.game);
 	},
 
@@ -154,14 +173,40 @@ BasicGame.Game.prototype = {
 
     this.parallax_level3.x = - this.game.camera.x * 0.6;
     this.parallax_level3.y = - this.game.camera.y * 0.6;
+
+    for (var i = 0; i < this.villagers.length; ++i) {
+
+      if (this.checkOverlap(this.altar, this.villagers[ i ]))
+      {
+        this.villagers[ i ].alpha = 0.3;
+        // console.log( 'Drag the sprites. Overlapping: true' );
+      }
+      else
+      {
+        //console.log( 'Drag the sprites. Overlapping: false' );
+      }
+    }
+        // sound manager update
+        this.soundManager.update();
+
 	},
+
+
+ checkOverlap: function(spriteA, spriteB) {
+
+    var boundsA = spriteA.getBounds();
+    var boundsB = spriteB.getBounds();
+
+    return Phaser.Rectangle.intersects(boundsA, boundsB);
+
+},
 
   __render: function() {
 
-    this.game.debug.cameraInfo(this.game.camera, 32, 32);
-    this.game.debug.spriteCoords(this.saucer, 32, 600);
+        this.game.debug.cameraInfo(this.game.camera, 32, 32);
+        this.game.debug.spriteCoords(this.saucer, 32, 600);
 
-},
+    },
 
 	quitGame: function (pointer) {
 		//	Here you should destroy anything you no longer need.

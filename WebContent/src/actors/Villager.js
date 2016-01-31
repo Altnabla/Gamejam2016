@@ -112,8 +112,8 @@ Villager.prototype.update = function() {
 			if(Math.abs(distX) < 250 && Math.abs(distY) < 250)
 			{
 				var angle = Math.atan2(saucerbeam.y - this.y, saucerbeam.x - this.x);
-				this.body.force.x = Math.cos(angle) * 225;    // accelerateToObject
-				this.body.force.y = Math.sin(angle) * 225;
+				this.body.force.x = Math.cos(angle) * this.speed;    // accelerateToObject
+				this.body.force.y = Math.sin(angle) * this.speed;
 			}
 			else
 			{
